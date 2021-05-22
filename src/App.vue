@@ -11,6 +11,7 @@
           fixed
           bottom
           right
+          color="primary"
           title="Scroll to top"
           @click="$vuetify.goTo(0)"
           transition="scale-transition"
@@ -52,5 +53,12 @@ export default Vue.extend({
 <style>
 a {
   text-decoration: none;
+}
+
+.theme--light.v-application {
+  background-color: var(--v-background-base, #5d4037) !important;
+}
+.theme--light.v-navigation-drawer {
+  background-color: var(--v-background-base, #5d4037) !important;
 }
 </style>

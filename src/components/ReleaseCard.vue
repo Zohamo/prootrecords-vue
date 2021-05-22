@@ -71,14 +71,21 @@
         <header class="d-flex flex-column px-8 pt-2">
           <div class="d-flex justify-space-between">
             <h3 class="text-h3" v-html="release.artist"></h3>
-            <v-subheader class="text-subtitle-2 px-0 ml-4">{{
-              release.datePublished | monthYear
-            }}</v-subheader>
+
+            <div class="ml-4 d-flex flex-column align-end">
+              <v-subheader class="text-subtitle-2">
+                {{ release.datePublished | monthYear }}
+              </v-subheader>
+              <v-subheader class="text-subtitle-2 small">
+                <small>[{{ release.ref }}]</small>
+              </v-subheader>
+            </div>
           </div>
+
           <h2 class="text-h2" v-html="release.title"></h2>
         </header>
 
-        <div class="d-flex justify-space-around my-12" style="width: 100%">
+        <div class="d-flex px-8 my-2" style="width: 100%">
           <v-btn
             v-if="release.description"
             @click="scrollTo('#description')"
@@ -124,6 +131,7 @@
           target="_blank"
           block
           large
+          color="primary"
           style="height: auto"
         >
           <v-icon large left>mdi-download</v-icon>
@@ -155,16 +163,17 @@
               v-for="track in tracklist"
               :key="track.position"
               :track="track"
+              :releaseArtist="release.artist"
             />
           </v-list>
 
           <template v-if="bonusTracklist.length">
             <h5 class="text-h5 my-4 d-flex align-center">
               <v-icon class="mr-2 black--text" medium>mdi-gift-outline</v-icon>
-              <span
-                >Bonus
-                {{ bonusTracklist.length > 1 ? "tracks" : "track" }}</span
-              >
+              <span>
+                Bonus
+                {{ bonusTracklist.length > 1 ? "tracks" : "track" }}
+              </span>
             </h5>
 
             <v-list dense>
@@ -172,6 +181,7 @@
                 v-for="track in bonusTracklist"
                 :key="track.position"
                 :track="track"
+                :releaseArtist="release.artist"
               />
             </v-list>
           </template>
@@ -184,7 +194,7 @@
 
 <script lang="ts">
 import ReleaseTracklistItem from "@/components/ReleaseTracklistItem.vue";
-import { Release, Track } from "@/types";
+import { Link, Release, Track } from "@/types";
 import Vue from "vue";
 import { PropType } from "vue";
 
@@ -220,8 +230,9 @@ export default Vue.extend({
     downloadUrl(): string | void {
       if (!this.release.links.length) return;
       return (
-        this.release.links.find((link) => link.platform.slug === "bandcamp")
-          .url + "?action=download"
+        this.release.links.find(
+          (link: Link) => link.platform.slug === "bandcamp"
+        ).url + "?action=download"
       );
     },
   },
@@ -242,21 +253,33 @@ export default Vue.extend({
     monthYear: (value: string) => {
       return value
         ? [
-            "January ",
-            "February ",
-            "March ",
-            "April ",
+            "Jan. ",
+            "Feb. ",
+            "Mar. ",
+            "Apr. ",
             "May ",
-            "June ",
-            "July ",
-            "August ",
-            "September ",
-            "October ",
-            "November ",
-            "December ",
+            "Jun. ",
+            "Jul. ",
+            "Aug. ",
+            "Sep. ",
+            "Oct. ",
+            "Nov. ",
+            "Dec. ",
           ][+value.split("-")[1]] + value.split("-")[0]
         : value;
     },
   },
 });
 </script>
+
+<style scoped>
+header .v-subheader {
+  margin: 0;
+  height: auto;
+  white-space: nowrap;
+}
+.v-list-item__title,
+.v-list-item__subtitle {
+  white-space: normal;
+}
+</style>

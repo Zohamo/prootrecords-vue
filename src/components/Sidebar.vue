@@ -68,7 +68,10 @@
               </v-list-item-avatar>
 
               <v-list-item-content class="pt-0">
-                <v-list-item-subtitle v-html="release.artist" />
+                <v-list-item-subtitle
+                  v-html="release.artist"
+                  class="text-uppercase"
+                />
                 <v-list-item-title v-html="release.title" />
               </v-list-item-content>
             </v-list-item>
@@ -107,10 +110,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style scoped>
-header a {
-  color: inherit;
-  text-decoration: none;
-}
-</style>

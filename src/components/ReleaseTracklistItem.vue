@@ -5,7 +5,14 @@
       <v-icon v-else small>mdi-plus</v-icon>
     </v-list-item-icon>
     <v-list-item-content>
-      <v-list-item-title v-html="track.title" />
+      <v-list-item-title>
+        <span
+          v-if="releaseArtist !== track.artist"
+          v-html="track.artist + ' - '"
+          class="grey--text"
+        ></span>
+        <span v-html="track.title"></span>
+      </v-list-item-title>
       <v-list-item-subtitle v-if="track.info" v-html="track.info.content" />
     </v-list-item-content>
     <v-list-item-action>
@@ -29,6 +36,7 @@ export default Vue.extend({
       type: Object as PropType<Track>,
       required: true,
     },
+    releaseArtist: String,
   },
 });
 </script>
@@ -46,6 +54,7 @@ export default Vue.extend({
 .v-list-item__content {
   margin-left: 24px;
 }
+.v-list-item__title,
 .v-list-item__subtitle {
   white-space: normal;
 }
