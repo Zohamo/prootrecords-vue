@@ -1,7 +1,9 @@
 <template>
   <div style="width: 100%; height: 100%">
     <loader v-if="loading" />
-    <release-card v-else :release="release" />
+    <v-slide-x-transition mode="in" hide-on-leave="true">
+      <release-card v-if="!loading" :release="release" />
+    </v-slide-x-transition>
   </div>
 </template>
 

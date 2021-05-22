@@ -63,7 +63,7 @@
             >
               <v-list-item-avatar tile size="150" class="mr-0">
                 <v-img
-                  :src="`https://prootrecords.com/music/${release.ref}/${release.ref}-front_150px.jpg`"
+                  :src="`https://prootrecords.com/music/${release.ref}/${release.ref}_150px.jpg`"
                 />
               </v-list-item-avatar>
 

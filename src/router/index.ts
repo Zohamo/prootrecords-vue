@@ -23,7 +23,6 @@ const routes: Array<RouteConfig> = [
   {
     path: "/releases/:slug",
     name: "ReleaseDetails",
-    props: true,
     component: ReleaseDetails,
     props: {
       type: String,

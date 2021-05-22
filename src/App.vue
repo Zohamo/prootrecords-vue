@@ -2,6 +2,23 @@
   <v-app>
     <sidebar />
     <v-main class="pa-8" style="margin-left: 270px">
+      <v-scale-transition origin="center center">
+        <v-btn
+          v-show="scrollToTopBtn"
+          v-scroll="onScroll"
+          class="mx-2"
+          fab
+          fixed
+          bottom
+          right
+          title="Scroll to top"
+          @click="$vuetify.goTo(0)"
+          transition="scale-transition"
+        >
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>
+      </v-scale-transition>
+
       <router-view />
     </v-main>
   </v-app>
@@ -19,7 +36,21 @@ export default Vue.extend({
   },
 
   data: () => ({
-    //
+    scrollToTopBtn: false,
   }),
+
+  methods: {
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.scrollToTopBtn = top > 20;
+    },
+  },
 });
 </script>
+
+<style>
+a {
+  text-decoration: none;
+}
+</style>
