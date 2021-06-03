@@ -3,10 +3,17 @@
     <template v-slot:prepend>
       <header class="d-flex flex-column align-center pa-4 pb-0">
         <router-link to="/">
-          <h1 class="text-h3">Proot</h1>
+          <h1
+            class="proot--text mt-2"
+            style="font-size: 3rem; line-height: 3rem"
+          >
+            Proot
+          </h1>
         </router-link>
 
-        <v-subheader>frivolous & original music</v-subheader>
+        <v-subheader class="mb-4" style="height: auto"
+          >frivolous & original music</v-subheader
+        >
 
         <v-btn
           v-show="releasesPanel"
@@ -41,11 +48,11 @@
           <v-btn
             plain
             @click="releasesPanel = !releasesPanel"
-            class="text-h5 py-8 px-4 d-flex"
+            class="text-h6 py-8 px-4 d-flex primary--text"
             style="width: 100%"
           >
-            <v-icon large v-text="'mdi-disc'" class="mr-4" />
-            <span>Releases</span>
+            <v-icon large v-text="'mdi-disc'" />
+            <span class="proot--text mt-1">Releases</span>
             <v-spacer />
             <v-icon v-text="'mdi-chevron-up'" />
           </v-btn>

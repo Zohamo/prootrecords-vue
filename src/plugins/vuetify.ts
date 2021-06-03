@@ -13,7 +13,7 @@ export default new Vuetify({
     themes: {
       light: {
         background: colors.grey.lighten5,
-        primary: colors.brown.base,
+        primary: colors.purple.darken2,
       },
     },
   },

@@ -54,6 +54,10 @@ export default Vue.extend({
 a {
   text-decoration: none;
 }
+.proot--text {
+  font-family: "Oi", cursive !important;
+  font-weight: 100 !important;
+}
 
 .theme--light.v-application {
   background-color: var(--v-background-base, #5d4037) !important;

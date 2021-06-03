@@ -15,7 +15,7 @@ import { Release } from "@/types";
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Home",
+  name: "ReleaseDetails",
 
   components: {
     Loader,
