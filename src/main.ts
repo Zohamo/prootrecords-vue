@@ -5,6 +5,10 @@ import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
+// Global constants
+Vue.prototype.$bandcampBgColor = "ffffff";
+Vue.prototype.$bandcampLinkColor = "7B1FA2";
+
 new Vue({
   router,
   vuetify,

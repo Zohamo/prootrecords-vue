@@ -24,6 +24,16 @@ export interface Platform {
   slug: string;
 }
 
+export interface Prooject {
+  id: number;
+  slug: string;
+  title: string;
+  bandcampId: number;
+  description: string;
+  concept: string;
+  tracks: Track[];
+}
+
 export interface Track {
   position: string;
   bonus: boolean;

@@ -25,16 +25,39 @@
         </v-btn>
 
         <v-list v-show="!releasesPanel">
-          <v-list-item
-            v-for="(navLink, i) in navLinks"
-            :key="i"
-            link
-            :to="navLink.name"
-          >
-            <v-list-item-content>
-              <v-list-item-title v-text="navLink.text" />
-            </v-list-item-content>
-          </v-list-item>
+          <div v-for="navLink in navLinks" :key="navLink.name">
+            <v-list-group v-if="navLink.children">
+              <template v-slot:activator>
+                <v-list-item-content>
+                  <v-list-item-title
+                    class="primary--text text-uppercase"
+                    v-text="navLink.text"
+                  />
+                </v-list-item-content>
+              </template>
+
+              <v-list-item
+                v-for="navLinkChild in navLink.children"
+                :key="navLinkChild.name"
+                :to="navLink.name + navLinkChild.name"
+              >
+                <v-list-item-content class="pl-4">
+                  <v-list-item-title
+                    v-text="navLinkChild.text"
+                    class="primary--text"
+                  />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+            <v-list-item v-else :to="navLink.name">
+              <v-list-item-content>
+                <v-list-item-title
+                  class="primary--text text-uppercase"
+                  v-text="navLink.text"
+                />
+              </v-list-item-content>
+            </v-list-item>
+          </div>
         </v-list>
       </header>
     </template>
@@ -102,8 +125,15 @@ export default Vue.extend({
     navLinks: [
       { name: "/about", text: "about" },
       { name: "/artists", text: "artists" },
-      { name: "/movies", text: "movies" },
-      { name: "/proojects", text: "proojects" },
+      // { name: "/movies", text: "movies" },
+      {
+        name: "/proojects",
+        text: "proojects",
+        children: [
+          { name: "/vgu", text: "V.G. Unplugged" },
+          { name: "/classical", text: "C.l.a.s.s.i.c.a.l." },
+        ],
+      },
       { name: "/releases", text: "releases" },
       { name: "/shop", text: "shop" },
     ],

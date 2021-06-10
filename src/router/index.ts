@@ -1,4 +1,5 @@
 import Home from "@/views/Home.vue";
+import ProojectDetails from "@/views/ProojectDetails.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
@@ -29,9 +30,19 @@ const routes: Array<RouteConfig> = [
       required: true,
     },
   },
+  {
+    path: "/proojects/:slug",
+    name: "ProojectDetails",
+    component: ProojectDetails,
+    props: {
+      type: String,
+      required: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 

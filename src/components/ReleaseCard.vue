@@ -19,7 +19,11 @@
             :src="
               'https://bandcamp.com/EmbeddedPlayer/album=' +
               release.bandcampId +
-              '/size=large/bgcol=ffffff/linkcol=333333/artwork=none/transparent=true/'
+              '/size=large/bgcol=' +
+              $bandcampBgColor +
+              '/linkcol=' +
+              $bandcampLinkColor +
+              '/artwork=none/transparent=true/'
             "
             seamless
           />

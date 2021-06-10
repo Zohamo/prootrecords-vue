@@ -33,7 +33,11 @@
               :src="
                 'https://bandcamp.com/EmbeddedPlayer/album=' +
                 release.bandcampId +
-                '/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=none/transparent=true/'
+                '/size=large/bgcol=' +
+                $bandcampBgColor +
+                '/linkcol=' +
+                $bandcampLinkColor +
+                '/tracklist=false/artwork=none/transparent=true/'
               "
               seamless
             />
@@ -60,8 +64,8 @@
           >
             <v-icon large left>mdi-download</v-icon>
             <div class="ml-2">
-              <span class="text-h6">Download</span>
-              <span class="text-body-2 grey--text ml-2">via Bandcamp</span>
+              <span class="text-h5">Download</span>
+              <span class="text-body-2 ml-2">via Bandcamp</span>
             </div>
           </v-btn>
         </div>
