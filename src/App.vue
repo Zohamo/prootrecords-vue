@@ -65,4 +65,8 @@ a {
 .theme--light.v-navigation-drawer {
   background-color: var(--v-background-base, #5d4037) !important;
 }
+
+.v-card__title {
+  word-break: normal !important;
+}
 </style>

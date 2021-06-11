@@ -4,9 +4,26 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    releases: [],
+  },
 
-  mutations: {},
+  mutations: {
+    releases(state, releases): Release[] {
+      return (state.releases = releases);
+    },
+  },
 
-  actions: {},
+  actions: {
+    getReleases({ commit }) {
+      fetch(`${process.env.VUE_APP_API_URL}/releases`)
+        .then((res) => res.json())
+        .then((res) => {
+          commit("releases", res);
+        })
+        .catch((error) => {
+          console.log("get releases", error);
+        });
+    },
+  },
 });

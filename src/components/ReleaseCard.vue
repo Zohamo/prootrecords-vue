@@ -1,213 +1,24 @@
 <template>
-  <v-container class="mx-auto" style="max-width: 1200px">
-    <v-row>
-      <v-col class="flex-grow-0">
-        <v-card tile elevation="3">
-          <v-img
-            v-if="imgUrl"
-            :src="imgUrl"
-            width="500"
-            height="500"
-            class="mb-6"
-            alt="artwork"
-          />
-        </v-card>
+  <v-card :to="'/releases/' + release.slug">
+    <v-img
+      :src="`https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`"
+    />
 
-        <v-card tile>
-          <iframe
-            style="border: 0; width: 500px; height: 472px"
-            :src="
-              'https://bandcamp.com/EmbeddedPlayer/album=' +
-              release.bandcampId +
-              '/size=large/bgcol=' +
-              $bandcampBgColor +
-              '/linkcol=' +
-              $bandcampLinkColor +
-              '/artwork=none/transparent=true/'
-            "
-            seamless
-          />
-        </v-card>
+    <v-card-subtitle class="text-h5 pb-0" v-html="release.artist" />
 
-        <v-card id="credits" v-if="release.credits.length" class="pa-4 my-4">
-          <h5 class="text-h6 mb-4 d-flex justify-center align-center">
-            <v-icon class="mr-2 black--text" medium>mdi-license</v-icon>
-            <span>Credits</span>
-          </h5>
-          <v-list dense>
-            <v-list-item
-              v-for="(credit, i) of release.credits"
-              :key="i"
-              style="min-height: unset"
-            >
-              <v-list-item-content class="py-1">
-                <v-list-item-subtitle
-                  v-html="credit.content"
-                ></v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
+    <v-card-title class="text-h4 pt-0" v-html="release.title" />
 
-        <v-card
-          id="external-links"
-          v-if="release.links.length"
-          class="pa-4 my-4"
-        >
-          <h5 class="text-h6 mb-4 d-flex justify-center align-center">
-            <v-icon class="mr-2 black--text" medium>mdi-link-variant</v-icon>
-            <span>External links</span>
-          </h5>
-          <div class="d-flex justify-space-around align-center flex-wrap">
-            <v-btn
-              v-for="(link, i) of release.links"
-              :key="i"
-              :href="link.url"
-              plain
-            >
-              {{ link.platform.name }}
-            </v-btn>
-          </div>
-        </v-card>
-      </v-col>
-
-      <v-col>
-        <header class="d-flex flex-column px-8 pt-2">
-          <div class="d-flex justify-space-between">
-            <h3 class="text-h3" v-html="release.artist"></h3>
-
-            <div class="ml-4 d-flex flex-column align-end">
-              <v-subheader class="text-subtitle-2">
-                {{ release.datePublished | monthYear }}
-              </v-subheader>
-              <v-subheader class="text-subtitle-2 small">
-                <small>[{{ release.ref }}]</small>
-              </v-subheader>
-            </div>
-          </div>
-
-          <h2 class="text-h2" v-html="release.title"></h2>
-        </header>
-
-        <div class="d-flex px-8 my-2" style="width: 100%">
-          <v-btn
-            v-if="release.description"
-            @click="scrollTo('#description')"
-            plain
-            small
-          >
-            <v-icon left>mdi-card-text-outline</v-icon>
-            Description
-          </v-btn>
-          <v-btn
-            v-if="release.tracks.length"
-            @click="scrollTo('#tracklist')"
-            plain
-            small
-          >
-            <v-icon left>mdi-playlist-music</v-icon>
-            Tracklist
-          </v-btn>
-          <v-btn
-            v-if="release.credits.length"
-            @click="scrollTo('#credits')"
-            plain
-            small
-          >
-            <v-icon left>mdi-license</v-icon>
-            Credits
-          </v-btn>
-          <v-btn
-            v-if="release.links.length"
-            @click="scrollTo('#external-links')"
-            plain
-            small
-          >
-            <v-icon left>mdi-link-variant</v-icon>
-            Links
-          </v-btn>
-        </div>
-
-        <v-btn
-          v-if="downloadUrl"
-          :href="downloadUrl"
-          class="my-12 pa-3 d-flex"
-          target="_blank"
-          block
-          large
-          color="primary"
-          style="height: auto"
-        >
-          <v-icon large left>mdi-download</v-icon>
-          <div class="ml-2">
-            <span class="text-h6">Download</span>
-            <span class="text-body-2 grey--text ml-1">via Bandcamp</span>
-          </div>
-        </v-btn>
-
-        <v-card
-          id="description"
-          v-if="release.description"
-          v-html="release.description"
-          class="px-8 pt-8 pb-4 my-8"
-        />
-
-        <v-card
-          id="tracklist"
-          v-if="release.tracks.length"
-          class="px-8 pt-8 pb-4 my-8"
-        >
-          <h4 class="text-h5 mb-4 d-flex align-center">
-            <v-icon class="mr-2 black--text" medium>mdi-playlist-music</v-icon>
-            <span>Tracklist</span>
-          </h4>
-
-          <v-list>
-            <release-tracklist-item
-              v-for="track in tracklist"
-              :key="track.position"
-              :track="track"
-              :releaseArtist="release.artist"
-            />
-          </v-list>
-
-          <template v-if="bonusTracklist.length">
-            <h5 class="text-h5 my-4 d-flex align-center">
-              <v-icon class="mr-2 black--text" medium>mdi-gift-outline</v-icon>
-              <span>
-                Bonus
-                {{ bonusTracklist.length > 1 ? "tracks" : "track" }}
-              </span>
-            </h5>
-
-            <v-list dense>
-              <release-tracklist-item
-                v-for="track in bonusTracklist"
-                :key="track.position"
-                :track="track"
-                :releaseArtist="release.artist"
-              />
-            </v-list>
-          </template>
-        </v-card>
-      </v-col>
-    </v-row>
-    <div class="d-flex"></div>
-  </v-container>
+    <v-card-text class="font-italic pt-0" v-html="release.style" />
+  </v-card>
 </template>
 
 <script lang="ts">
-import ReleaseTracklistItem from "@/components/ReleaseTracklistItem.vue";
-import { Link, Release, Track } from "@/types";
+import { Release } from "@/types";
 import Vue from "vue";
 import { PropType } from "vue";
 
 export default Vue.extend({
   name: "ReleaseCard",
-
-  components: {
-    ReleaseTracklistItem,
-  },
 
   props: {
     release: {
@@ -215,75 +26,25 @@ export default Vue.extend({
       required: true,
     },
   },
-
-  data: () => ({
-    tracklist: [] as Release[],
-    bonusTracklist: [] as Release[],
-  }),
-
-  created() {
-    this.tracklist = this.getTracklist();
-    this.bonusTracklist = this.getTracklist(true);
-  },
-
-  computed: {
-    imgUrl(): string | void {
-      if (!this.release) return;
-      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
-    },
-    downloadUrl(): string | void {
-      if (!this.release.links.length) return;
-      return (
-        this.release.links.find(
-          (link: Link) => link.platform.slug === "bandcamp"
-        ).url + "?action=download"
-      );
-    },
-  },
-
-  methods: {
-    getTracklist: function (bonus = false) {
-      return this.release.tracks?.filter((track: Track) =>
-        bonus ? track.bonus : !track.bonus
-      );
-    },
-
-    scrollTo: function (target: string) {
-      return this.$vuetify.goTo(target);
-    },
-  },
-
-  filters: {
-    monthYear: (value: string) => {
-      return value
-        ? [
-            "Jan. ",
-            "Feb. ",
-            "Mar. ",
-            "Apr. ",
-            "May ",
-            "Jun. ",
-            "Jul. ",
-            "Aug. ",
-            "Sep. ",
-            "Oct. ",
-            "Nov. ",
-            "Dec. ",
-          ][+value.split("-")[1]] + value.split("-")[0]
-        : value;
-    },
-  },
 });
 </script>
 
-<style scoped>
-header .v-subheader {
-  margin: 0;
-  height: auto;
-  white-space: nowrap;
+<style>
+.v-card--link,
+.v-card--link .v-image__image {
+  transition: all 350ms ease-out;
 }
-.v-list-item__title,
-.v-list-item__subtitle {
-  white-space: normal;
+.v-card--link:hover,
+.v-card--link:hover .v-image__image {
+  transition: all 100ms ease-in;
+}
+.v-card--link:hover {
+  background-color: var(--v-primary-lighten3);
+}
+.v-card--link .v-image__image {
+  filter: sepia(0.3);
+}
+.v-card--link:hover .v-image__image {
+  filter: sepia(0);
 }
 </style>

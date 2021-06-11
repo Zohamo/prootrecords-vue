@@ -66,7 +66,7 @@ import LastRelease from "@/components/LastRelease.vue";
 import Loader from "@/components/Loader.vue";
 import ProojectService from "@/services/ProojectService";
 import ReleaseService from "@/services/ReleaseService";
-import { Prooject, Release, Track } from "@/types";
+import { Prooject, Release } from "@/types";
 import Vue from "vue";
 
 export default Vue.extend({

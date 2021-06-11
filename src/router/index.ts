@@ -1,4 +1,5 @@
 import Home from "@/views/Home.vue";
+import Releases from "@/views/Releases.vue";
 import ProojectDetails from "@/views/ProojectDetails.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
 import Vue from "vue";
@@ -20,6 +21,11 @@ const routes: Array<RouteConfig> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/releases",
+    name: "Releases",
+    component: Releases,
   },
   {
     path: "/releases/:slug",
