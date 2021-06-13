@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; height: 100%">
+  <div class="pt-8 px-4" style="width: 100%; height: 100%">
     <loader v-if="loading" />
     <v-slide-x-transition :hide-on-leave="true">
       <div v-if="!loading">

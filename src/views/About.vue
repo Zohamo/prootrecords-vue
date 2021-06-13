@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pa-8">
     <h1 class="text-h2 mb-16">About Proot records</h1>
 
     <p>

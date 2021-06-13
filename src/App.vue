@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <sidebar />
-    <v-main class="pa-8" style="margin-left: 270px">
+    <v-main class="px-3" style="margin-left: 270px">
       <v-scale-transition origin="center center">
         <v-btn
           v-show="scrollToTopBtn"

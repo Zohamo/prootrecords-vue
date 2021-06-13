@@ -1,9 +1,9 @@
 <template>
-  <div style="width: 100%; height: 100%">
+  <div class="pt-4 px-3" style="width: 100%; height: 100%">
     <loader v-if="loading" />
 
     <v-slide-x-transition v-if="!loading" :hide-on-leave="true">
-      <v-container class="mx-auto" style="max-width: 1200px">
+      <v-container class="mx-auto">
         <v-row>
           <v-col class="flex-grow-0">
             <v-card tile elevation="3">
@@ -141,12 +141,12 @@
             <v-btn
               v-if="downloadUrl"
               :href="downloadUrl"
-              class="my-12 pa-3 d-flex"
+              class="my-8 ml-12 pa-3 d-flex"
               target="_blank"
               block
               large
               color="primary"
-              style="height: auto"
+              style="height: auto; min-width: auto !important; max-width: 400px"
             >
               <v-icon large left>mdi-download</v-icon>
               <div class="ml-2">
