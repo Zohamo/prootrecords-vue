@@ -1,6 +1,8 @@
 import Home from "@/views/Home.vue";
-import Releases from "@/views/Releases.vue";
+import Artists from "@/views/Artists.vue";
+import ArtistDetails from "@/views/ArtistDetails.vue";
 import ProojectDetails from "@/views/ProojectDetails.vue";
+import Releases from "@/views/Releases.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
@@ -23,14 +25,14 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/releases",
-    name: "Releases",
-    component: Releases,
+    path: "/artists",
+    name: "Artists",
+    component: Artists,
   },
   {
-    path: "/releases/:slug",
-    name: "ReleaseDetails",
-    component: ReleaseDetails,
+    path: "/artists/:slug",
+    name: "ArtistDetails",
+    component: ArtistDetails,
     props: {
       type: String,
       required: true,
@@ -40,6 +42,20 @@ const routes: Array<RouteConfig> = [
     path: "/proojects/:slug",
     name: "ProojectDetails",
     component: ProojectDetails,
+    props: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    path: "/releases",
+    name: "Releases",
+    component: Releases,
+  },
+  {
+    path: "/releases/:slug",
+    name: "ReleaseDetails",
+    component: ReleaseDetails,
     props: {
       type: String,
       required: true,

@@ -1,3 +1,19 @@
+export interface Artist {
+  id: number;
+  slug: string;
+  name: string;
+  url: string;
+  description: string;
+  categories: Category[];
+}
+
+export interface Category {
+  id: number;
+  slug: string;
+  name: string;
+  icon: string;
+}
+
 export interface Release {
   id: number;
   ref: string;
