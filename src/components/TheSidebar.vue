@@ -115,10 +115,8 @@
 <script lang="ts">
 import ReleaseService from "@/services/ReleaseService";
 import { Release } from "@/types";
-import Vue from "vue";
-
-export default Vue.extend({
-  name: "Sidebar",
+export default {
+  name: "TheSidebar",
 
   data: () => ({
     releases: [] as Release[],
@@ -141,9 +139,9 @@ export default Vue.extend({
   }),
 
   created() {
-    ReleaseService.all().then((releases) => {
+    ReleaseService.all().then((releases: Release[]) => {
       this.releases = releases;
     });
   },
-});
+};
 </script>

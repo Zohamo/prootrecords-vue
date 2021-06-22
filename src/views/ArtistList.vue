@@ -16,11 +16,12 @@
   </v-container>
 </template>
 
-<script>
-import { mapState } from "vuex";
+<script lang="ts">
 import ArtistCard from "@/components/ArtistCard.vue";
-
+import { mapState } from "vuex";
 export default {
+  name: "ArtistList",
+
   components: { ArtistCard },
 
   computed: {

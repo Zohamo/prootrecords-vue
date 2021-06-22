@@ -1,9 +1,9 @@
 <template>
   <div class="pt-4 px-3" style="width: 100%; height: 100%">
-    <loader v-if="loading" />
+    <base-loader v-if="loading" />
 
-    <v-slide-x-transition v-if="!loading" :hide-on-leave="true">
-      <v-container class="mx-auto">
+    <v-slide-x-transition :hide-on-leave="true">
+      <v-container v-if="!loading" class="mx-auto">
         <v-row>
           <v-col class="flex-grow-0">
             <v-card tile elevation="3">
@@ -49,9 +49,7 @@
                   style="min-height: unset"
                 >
                   <v-list-item-content class="py-1">
-                    <v-list-item-subtitle
-                      v-html="credit.content"
-                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle v-html="credit.content" />
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -74,9 +72,8 @@
                   :key="i"
                   :href="link.url"
                   plain
-                >
-                  {{ link.platform.name }}
-                </v-btn>
+                  v-html="link.platform.name"
+                />
               </div>
             </v-card>
           </v-col>
@@ -84,7 +81,7 @@
           <v-col>
             <header class="d-flex flex-column px-8 pt-2">
               <div class="d-flex justify-space-between">
-                <h3 class="text-h3" v-html="release.artist"></h3>
+                <h3 class="text-h3" v-html="release.artist" />
 
                 <div class="ml-4 d-flex flex-column align-end">
                   <v-subheader class="text-subtitle-2">
@@ -96,7 +93,7 @@
                 </div>
               </div>
 
-              <h2 class="text-h2" v-html="release.title"></h2>
+              <h2 class="text-h2" v-html="release.title" />
             </header>
 
             <div class="d-flex px-8 my-2" style="width: 100%">
@@ -109,6 +106,7 @@
                 <v-icon left>mdi-card-text-outline</v-icon>
                 Description
               </v-btn>
+
               <v-btn
                 v-if="release.tracks && release.tracks.length"
                 @click="scrollTo('#tracklist')"
@@ -118,6 +116,7 @@
                 <v-icon left>mdi-playlist-music</v-icon>
                 Tracklist
               </v-btn>
+
               <v-btn
                 v-if="release.credits && release.credits.length"
                 @click="scrollTo('#credits')"
@@ -127,6 +126,7 @@
                 <v-icon left>mdi-license</v-icon>
                 Credits
               </v-btn>
+
               <v-btn
                 v-if="release.links && release.links.length"
                 @click="scrollTo('#external-links')"
@@ -149,8 +149,10 @@
               style="height: auto; min-width: auto !important; max-width: 400px"
             >
               <v-icon large left>mdi-download</v-icon>
+
               <div class="ml-2">
                 <span class="text-h6">Download</span>
+
                 <span class="text-body-2 grey--text ml-1">via Bandcamp</span>
               </div>
             </v-btn>
@@ -212,25 +214,20 @@
 </template>
 
 <script lang="ts">
-import Loader from "@/components/Loader.vue";
+import BaseLoader from "@/components/BaseLoader.vue";
 import ReleaseTracklistItem from "@/components/ReleaseTracklistItem.vue";
 import ReleaseService from "@/services/ReleaseService";
 import { Link, Release, Track } from "@/types";
-import Vue from "vue";
-
-export default Vue.extend({
+export default {
   name: "ReleaseDetails",
 
-  components: {
-    Loader,
-    ReleaseTracklistItem,
-  },
+  components: { BaseLoader, ReleaseTracklistItem },
 
   data: () => ({
     loading: false,
     release: {} as Release,
-    tracklist: [] as Release[],
-    bonusTracklist: [] as Release[],
+    tracklist: [] as Track[],
+    bonusTracklist: [] as Track[],
   }),
 
   watch: {
@@ -265,13 +262,13 @@ export default Vue.extend({
   },
 
   methods: {
-    getTracklist: function (bonus = false) {
+    getTracklist(bonus = false): Track[] {
       return this.release.tracks?.filter((track: Track) =>
         bonus ? track.bonus : !track.bonus
       );
     },
 
-    scrollTo: function (target: string) {
+    scrollTo(target: string) {
       return this.$vuetify.goTo(target);
     },
   },
@@ -296,7 +293,7 @@ export default Vue.extend({
         : value;
     },
   },
-});
+};
 </script>
 
 <style scoped>

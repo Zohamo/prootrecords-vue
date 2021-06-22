@@ -2,19 +2,24 @@
   <v-list-item>
     <v-list-item-icon>
       <v-chip v-if="!track.bonus" outlined>{{ track.position }}</v-chip>
+
       <v-icon v-else small>mdi-plus</v-icon>
     </v-list-item-icon>
+
     <v-list-item-content>
       <v-list-item-title>
         <span
           v-if="releaseArtist !== track.artist"
           v-html="track.artist + ' - '"
           class="grey--text"
-        ></span>
-        <span v-html="track.title"></span>
+        />
+
+        <span v-html="track.title" />
       </v-list-item-title>
+
       <v-list-item-subtitle v-if="track.info" v-html="track.info.content" />
     </v-list-item-content>
+
     <v-list-item-action>
       <v-btn v-if="track.url" icon tile :href="track.url" target="_blank">
         <v-icon>mdi-open-in-new</v-icon>
@@ -25,10 +30,8 @@
 
 <script lang="ts">
 import { Track } from "@/types";
-import Vue from "vue";
 import { PropType } from "vue";
-
-export default Vue.extend({
+export default {
   name: "ReleaseTracklistItem",
 
   props: {
@@ -36,9 +39,12 @@ export default Vue.extend({
       type: Object as PropType<Track>,
       required: true,
     },
-    releaseArtist: String,
+    releaseArtist: {
+      type: String,
+      required: true,
+    },
   },
-});
+};
 </script>
 
 <style scoped>

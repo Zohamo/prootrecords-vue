@@ -1,9 +1,9 @@
 <template>
   <div class="pt-4 px-3" style="width: 100%; height: 100%">
-    <loader v-if="loading" />
+    <base-loader v-if="loading"></base-loader>
 
-    <v-slide-x-transition v-if="!loading" :hide-on-leave="true">
-      <v-container class="mx-auto">
+    <v-slide-x-transition :hide-on-leave="true">
+      <v-container v-if="!loading" class="mx-auto">
         <v-card style="max-width: 1000px">
           <div class="d-flex flex-no-wrap justify-space-between">
             <v-card-title class="text-h5 d-flex flex-nowrap">
@@ -45,14 +45,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Loader from "@/components/Loader.vue";
+import BaseLoader from "@/components/BaseLoader.vue";
 import { Artist } from "@/types";
-
-export default Vue.extend({
+export default {
   name: "ArtistDetails",
 
-  components: { Loader },
+  components: { BaseLoader },
 
   data: () => ({
     loading: true,
@@ -74,5 +72,5 @@ export default Vue.extend({
       immediate: true,
     },
   },
-});
+};
 </script>

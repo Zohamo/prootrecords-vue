@@ -23,12 +23,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { PropType } from "vue";
 import { Artist } from "@/types";
-
-export default Vue.extend({
-  name: "artist-card",
+import { PropType } from "vue";
+export default {
+  name: "ArtistCard",
 
   props: {
     artist: {
@@ -36,5 +34,5 @@ export default Vue.extend({
       required: true,
     },
   },
-});
+};
 </script>

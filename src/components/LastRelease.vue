@@ -49,7 +49,7 @@
               item-height="auto"
               max-height="290"
               v-html="release.description"
-            ></v-virtual-scroll>
+            />
           </v-card>
 
           <v-btn
@@ -76,10 +76,8 @@
 
 <script lang="ts">
 import { Link, Release } from "@/types";
-import Vue from "vue";
 import { PropType } from "vue";
-
-export default Vue.extend({
+export default {
   name: "LastRelease",
 
   props: {
@@ -90,18 +88,19 @@ export default Vue.extend({
   },
 
   computed: {
-    releaseImgUrl(): string | void {
-      if (!this.release) return;
-      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
+    releaseImgUrl(): string {
+      return this.release?.ref
+        ? `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`
+        : "";
     },
-    releaseDownloadUrl(): string | void {
-      if (!this.release.links.length) return;
-      return (
-        this.release.links.find(
-          (link: Link) => link.platform.slug === "bandcamp"
-        ).url + "?action=download"
-      );
+
+    releaseDownloadUrl(): string {
+      return this.release?.links && this.release.links.length
+        ? this.release.links.find(
+            (link: Link) => link.platform.slug === "bandcamp"
+          ).url + "?action=download"
+        : "";
     },
   },
-});
+};
 </script>

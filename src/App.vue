@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <sidebar />
+    <the-sidebar />
     <v-main class="px-3" style="margin-left: 270px">
       <v-scale-transition origin="center center">
         <v-btn
@@ -26,15 +26,13 @@
 </template>
 
 <script lang="ts">
-import Sidebar from "@/components/Sidebar.vue";
+import TheSidebar from "@/components/TheSidebar.vue";
 import Vue from "vue";
 
 export default Vue.extend({
   name: "App",
 
-  components: {
-    Sidebar,
-  },
+  components: { TheSidebar },
 
   data: () => ({
     scrollToTopBtn: false,
@@ -49,24 +47,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style>
-a {
-  text-decoration: none;
-}
-.proot--text {
-  font-family: "Oi", cursive !important;
-  font-weight: 100 !important;
-}
-
-.theme--light.v-application {
-  background-color: var(--v-background-base, #5d4037) !important;
-}
-.theme--light.v-navigation-drawer {
-  background-color: var(--v-background-base, #5d4037) !important;
-}
-
-.v-card__title {
-  word-break: normal !important;
-}
-</style>

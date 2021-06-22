@@ -13,26 +13,26 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
 import ReleaseCard from "@/components/ReleaseCard.vue";
+import { Release } from "@/types";
 import { mapActions } from "vuex";
 export default {
+  name: "ReleaseList",
+
   components: { ReleaseCard },
-  data() {
-    return {};
-  },
 
   methods: {
     ...mapActions(["getReleases"]),
   },
 
   computed: {
-    releases() {
+    releases(): Release[] {
       return this.$store.state.releases;
     },
   },
 
-  created() {
+  beforeMount() {
     this.getReleases();
   },
 };

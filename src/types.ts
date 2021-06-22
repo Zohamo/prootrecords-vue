@@ -25,8 +25,8 @@ export interface Release {
   bandcampId: string;
   datePublished: string;
   dateModified: string;
-  tracks?: Track[];
-  links?: Link;
+  tracks: Track[];
+  links: Link[];
 }
 
 export interface Link {

@@ -1,9 +1,9 @@
 import Home from "@/views/Home.vue";
-import Artists from "@/views/Artists.vue";
 import ArtistDetails from "@/views/ArtistDetails.vue";
+import ArtistList from "@/views/ArtistList.vue";
 import ProojectDetails from "@/views/ProojectDetails.vue";
-import Releases from "@/views/Releases.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
+import ReleaseList from "@/views/ReleaseList.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
@@ -27,7 +27,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/artists",
     name: "Artists",
-    component: Artists,
+    component: ArtistList,
   },
   {
     path: "/artists/:slug",
@@ -50,7 +50,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/releases",
     name: "Releases",
-    component: Releases,
+    component: ReleaseList,
   },
   {
     path: "/releases/:slug",
