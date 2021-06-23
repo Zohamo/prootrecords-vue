@@ -216,8 +216,8 @@
 <script lang="ts">
 import BaseLoader from "@/components/BaseLoader.vue";
 import ReleaseTracklistItem from "@/components/ReleaseTracklistItem.vue";
-import ReleaseService from "@/services/ReleaseService";
-import { Link, Release, Track } from "@/types";
+import { Link, Track } from "@/types";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "ReleaseDetails",
 
@@ -225,7 +225,6 @@ export default {
 
   data: () => ({
     loading: false,
-    release: {} as Release,
     tracklist: [] as Track[],
     bonusTracklist: [] as Track[],
   }),
@@ -234,8 +233,7 @@ export default {
     "$route.params.slug": {
       handler: function () {
         this.loading = true;
-        ReleaseService.get(this.$route.params.slug).then((release) => {
-          this.release = release;
+        this.getRelease(this.$route.params.slug).then(() => {
           this.tracklist = this.getTracklist();
           this.bonusTracklist = this.getTracklist(true);
           this.loading = false;
@@ -247,10 +245,13 @@ export default {
   },
 
   computed: {
+    ...mapState(["release"]),
+
     imgUrl(): string | void {
       if (!this.release) return;
       return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
     },
+
     downloadUrl(): string | void {
       if (!this.release.links || !this.release.links.length) return;
       return (
@@ -262,6 +263,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(["getRelease"]),
+
     getTracklist(bonus = false): Track[] {
       return this.release.tracks?.filter((track: Track) =>
         bonus ? track.bonus : !track.bonus

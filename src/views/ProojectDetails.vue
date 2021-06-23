@@ -80,15 +80,13 @@
 
 <script lang="ts">
 import BaseLoader from "@/components/BaseLoader.vue";
-import ProojectService from "@/services/ProojectService";
-import { Prooject } from "@/types";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "ProojectDetails",
 
   components: { BaseLoader },
 
   data: () => ({
-    prooject: {} as Prooject,
     loading: false,
   }),
 
@@ -96,14 +94,21 @@ export default {
     "$route.params.slug": {
       handler: function () {
         this.loading = true;
-        ProojectService.get(this.$route.params.slug).then((prooject) => {
-          this.prooject = prooject;
+        this.getProoject(this.$route.params.slug).then(() => {
           this.loading = false;
         });
       },
       deep: true,
       immediate: true,
     },
+  },
+
+  computed: {
+    ...mapState(["prooject"]),
+  },
+
+  methods: {
+    ...mapActions(["getProoject"]),
   },
 };
 </script>

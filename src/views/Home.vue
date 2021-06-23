@@ -1,13 +1,11 @@
 <template>
   <div style="width: 100%; height: 100%">
-    <base-loader v-if="loading"></base-loader>
-
     <v-slide-x-transition :hide-on-leave="true">
-      <v-row v-if="!loading">
-        <v-col cols="9" style="max-width: 1000px">
+      <v-row>
+        <v-col v-if="release" cols="9" style="max-width: 1000px">
           <div class="d-flex flex-column">
             <v-subheader class="primary--text">Last Release</v-subheader>
-            <last-release :release="lastRelease" />
+            <last-release :release="release" />
           </div>
         </v-col>
         <v-col>
@@ -56,29 +54,31 @@
 
 <script lang="ts">
 import LastRelease from "@/components/LastRelease.vue";
-import BaseLoader from "@/components/BaseLoader.vue";
-import ProojectService from "@/services/ProojectService";
-import ReleaseService from "@/services/ReleaseService";
-import { Prooject, Release } from "@/types";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Home",
 
-  components: { BaseLoader, LastRelease },
+  components: { LastRelease },
 
-  data: () => ({
-    loading: true,
-    lastRelease: {} as Release,
-    proojects: [] as Prooject[],
-  }),
+  computed: {
+    ...mapState(["release", "releases", "proojects"]),
+  },
 
-  created() {
-    ReleaseService.get("last").then((release) => {
-      this.lastRelease = release;
-      this.loading = false;
-    });
-    ProojectService.all().then((proojects) => {
-      this.proojects = proojects;
-    });
+  watch: {
+    releases() {
+      if (this.releases.length) {
+        this.getRelease(this.releases[0].slug);
+      }
+    },
+  },
+
+  beforeMount() {
+    this.getRelease(this.releases[0].slug);
+    this.getProojects();
+  },
+
+  methods: {
+    ...mapActions(["getRelease", "getProojects"]),
   },
 };
 </script>

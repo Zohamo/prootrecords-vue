@@ -113,13 +113,11 @@
 </template>
 
 <script lang="ts">
-import ReleaseService from "@/services/ReleaseService";
-import { Release } from "@/types";
+import { mapState } from "vuex";
 export default {
   name: "TheSidebar",
 
   data: () => ({
-    releases: [] as Release[],
     navLinks: [
       { name: "/about", text: "about" },
       { name: "/artists", text: "artists" },
@@ -133,15 +131,18 @@ export default {
         ],
       },
       { name: "/releases", text: "releases" },
-      { name: "/shop", text: "shop" },
+      // { name: "/shop", text: "shop" },
     ],
+
     releasesPanel: false,
   }),
 
-  created() {
-    ReleaseService.all().then((releases: Release[]) => {
-      this.releases = releases;
-    });
+  computed: {
+    ...mapState(["releases"]),
+  },
+
+  beforeMount() {
+    this.$store.dispatch("getReleases");
   },
 };
 </script>

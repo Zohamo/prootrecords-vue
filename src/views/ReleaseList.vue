@@ -15,25 +15,18 @@
 
 <script lang="ts">
 import ReleaseCard from "@/components/ReleaseCard.vue";
-import { Release } from "@/types";
-import { mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "ReleaseList",
 
   components: { ReleaseCard },
 
-  methods: {
-    ...mapActions(["getReleases"]),
-  },
-
   computed: {
-    releases(): Release[] {
-      return this.$store.state.releases;
-    },
+    ...mapState(["releases"]),
   },
 
   beforeMount() {
-    this.getReleases();
+    this.$store.dispatch("getReleases");
   },
 };
 </script>
