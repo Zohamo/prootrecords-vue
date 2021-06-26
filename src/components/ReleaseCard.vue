@@ -1,8 +1,6 @@
 <template>
   <v-card :to="'/releases/' + release.slug">
-    <v-img
-      :src="`https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`"
-    />
+    <v-img :src="imgUrl" />
 
     <v-card-subtitle class="text-h5 pb-0" v-html="release.artist" />
 
@@ -22,6 +20,12 @@ export default {
     release: {
       type: Object as PropType<Release>,
       required: true,
+    },
+  },
+
+  computed: {
+    imgUrl(): string {
+      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
     },
   },
 };

@@ -47,6 +47,7 @@
 <script lang="ts">
 import BaseLoader from "@/components/BaseLoader.vue";
 import { Artist } from "@/types";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "ArtistDetails",
 
@@ -57,20 +58,26 @@ export default {
     artist: {} as Artist,
   }),
 
+  computed: {
+    ...mapGetters(["getArtistBySlug"]),
+  },
+
   watch: {
     "$route.params.slug": {
       handler: function () {
         this.loading = true;
-        this.$store.dispatch("getArtists").then(() => {
-          this.artist = this.$store.getters.getArtistBySlug(
-            this.$route.params.slug
-          );
+        this.getArtists().then(() => {
+          this.artist = this.getArtistBySlug(this.$route.params.slug);
           this.loading = false;
         });
       },
       deep: true,
       immediate: true,
     },
+  },
+
+  methods: {
+    ...mapActions(["getArtists"]),
   },
 };
 </script>

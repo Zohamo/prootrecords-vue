@@ -73,7 +73,9 @@ export default {
   },
 
   beforeMount() {
-    this.getRelease(this.releases[0].slug);
+    if (this.releases.length) {
+      this.getRelease(this.releases[0].slug);
+    }
     this.getProojects();
   },
 

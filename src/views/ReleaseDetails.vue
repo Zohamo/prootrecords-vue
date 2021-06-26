@@ -225,8 +225,6 @@ export default {
 
   data: () => ({
     loading: false,
-    tracklist: [] as Track[],
-    bonusTracklist: [] as Track[],
   }),
 
   watch: {
@@ -234,8 +232,6 @@ export default {
       handler: function () {
         this.loading = true;
         this.getRelease(this.$route.params.slug).then(() => {
-          this.tracklist = this.getTracklist();
-          this.bonusTracklist = this.getTracklist(true);
           this.loading = false;
         });
       },
@@ -246,6 +242,14 @@ export default {
 
   computed: {
     ...mapState(["release"]),
+
+    tracklist(): Track[] {
+      return this.release.tracks?.filter((track: Track) => !track.bonus);
+    },
+
+    bonusTracklist(): Track[] {
+      return this.release.tracks?.filter((track: Track) => track.bonus);
+    },
 
     imgUrl(): string | void {
       if (!this.release) return;
@@ -264,12 +268,6 @@ export default {
 
   methods: {
     ...mapActions(["getRelease"]),
-
-    getTracklist(bonus = false): Track[] {
-      return this.release.tracks?.filter((track: Track) =>
-        bonus ? track.bonus : !track.bonus
-      );
-    },
 
     scrollTo(target: string) {
       return this.$vuetify.goTo(target);

@@ -24,9 +24,5 @@ export default {
   computed: {
     ...mapState(["releases"]),
   },
-
-  beforeMount() {
-    this.$store.dispatch("getReleases");
-  },
 };
 </script>

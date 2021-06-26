@@ -39,6 +39,7 @@ export default {
       type: Object as PropType<Track>,
       required: true,
     },
+
     releaseArtist: {
       type: String,
       required: true,

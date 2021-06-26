@@ -30,15 +30,7 @@
           <v-card tile class="mb-4" style="height: 120px">
             <iframe
               style="border: 0; width: 100%; height: 120px"
-              :src="
-                'https://bandcamp.com/EmbeddedPlayer/album=' +
-                release.bandcampId +
-                '/size=large/bgcol=' +
-                $bandcampBgColor +
-                '/linkcol=' +
-                $bandcampLinkColor +
-                '/tracklist=false/artwork=none/transparent=true/'
-              "
+              :src="bandcampSrc"
               seamless
             />
           </v-card>
@@ -100,6 +92,10 @@ export default {
             (link: Link) => link.platform.slug === "bandcamp"
           ).url + "?action=download"
         : "";
+    },
+
+    bandcampSrc(): string {
+      return `https://bandcamp.com/EmbeddedPlayer/album=${this.release.bandcampId}/size=large/bgcol=${this.$bandcampBgColor}/linkcol=${this.$bandcampLinkColor}/tracklist=false/artwork=none/transparent=true/`;
     },
   },
 };

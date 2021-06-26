@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import ArtistCard from "@/components/ArtistCard.vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "ArtistList",
 
@@ -28,8 +28,12 @@ export default {
     ...mapState(["artists"]),
   },
 
+  methods: {
+    ...mapActions(["getArtists"]),
+  },
+
   async beforeMount() {
-    this.$store.dispatch("getArtists");
+    this.getArtists();
   },
 };
 </script>

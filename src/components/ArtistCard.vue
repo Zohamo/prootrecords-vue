@@ -14,9 +14,7 @@
       </v-card-title>
 
       <v-avatar class="ma-3" size="75" tile>
-        <img
-          :src="`https://prootrecords.com/images/artists/${artist.slug}.jpg`"
-        />
+        <img :src="imgUrl" alt="artist photo" />
       </v-avatar>
     </div>
   </v-card>
@@ -32,6 +30,12 @@ export default {
     artist: {
       type: Object as PropType<Artist>,
       required: true,
+    },
+  },
+
+  computed: {
+    imgUrl(): string {
+      return `https://prootrecords.com/images/artists/${this.artist.slug}.jpg`;
     },
   },
 };

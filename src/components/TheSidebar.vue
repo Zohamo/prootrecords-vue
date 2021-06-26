@@ -92,9 +92,7 @@
               style="min-height: auto"
             >
               <v-list-item-avatar tile size="150" class="mr-0">
-                <v-img
-                  :src="`https://prootrecords.com/music/${release.ref}/${release.ref}_150px.jpg`"
-                />
+                <v-img :src="getReleaseImgUrl(release.ref)" />
               </v-list-item-avatar>
 
               <v-list-item-content class="pt-0">
@@ -143,6 +141,12 @@ export default {
 
   beforeMount() {
     this.$store.dispatch("getReleases");
+  },
+
+  methods: {
+    getReleaseImgUrl(ref: string): string {
+      return `https://prootrecords.com/music/${ref}/${ref}_150px.jpg`;
+    },
   },
 };
 </script>
