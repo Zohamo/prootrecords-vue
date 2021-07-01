@@ -9,11 +9,15 @@ export default new Vuetify({
     options: {
       customProperties: true,
     },
-    dark: false,
+    dark: true,
     themes: {
       light: {
         background: colors.grey.lighten5,
         primary: colors.purple.darken2,
+      },
+      dark: {
+        background: colors.grey.darken4,
+        primary: colors.purple.lighten2,
       },
     },
   },

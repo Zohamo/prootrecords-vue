@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <the-sidebar />
+
     <v-main class="px-3" style="margin-left: 270px">
       <v-scale-transition origin="center center">
         <v-btn

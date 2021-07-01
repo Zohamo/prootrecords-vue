@@ -12,7 +12,7 @@
         </router-link>
 
         <v-subheader class="mb-4" style="height: auto"
-          >frivolous & original music</v-subheader
+          >frivolous &amp; original music</v-subheader
         >
 
         <v-btn
@@ -111,7 +111,7 @@
 </template>
 
 <script lang="ts">
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "TheSidebar",
 
@@ -140,10 +140,12 @@ export default {
   },
 
   beforeMount() {
-    this.$store.dispatch("getReleases");
+    this.getReleases();
   },
 
   methods: {
+    ...mapActions(["getReleases"]),
+
     getReleaseImgUrl(ref: string): string {
       return `https://prootrecords.com/music/${ref}/${ref}_150px.jpg`;
     },

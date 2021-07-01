@@ -1,5 +1,6 @@
 a {
   text-decoration: none;
+  color: var(--v-primary-lighten1);
 }
 
 .proot--text {
@@ -7,12 +8,13 @@ a {
   font-weight: 100 !important;
 }
 
-.theme--light.v-application {
-  background-color: var(--v-background-base, #5d4037) !important;
+.theme--dark.v-navigation-drawer {
+  background-color: var(--v-background-darken1) !important;
 }
-.theme--light.v-navigation-drawer {
-  background-color: var(--v-background-base, #5d4037) !important;
-}
+
+/*
+ * Card
+ */
 
 .v-card__title {
   word-break: normal !important;
@@ -26,8 +28,11 @@ a {
 .v-card--link:hover .v-image__image {
   transition: all 100ms ease-in;
 }
+.v-card--link {
+  background-color: var(--v-background-lighten1) !important;
+}
 .v-card--link:hover {
-  background-color: var(--v-primary-lighten3);
+  background-color: var(--v-primary-base) !important;
 }
 .v-card--link .v-image__image {
   filter: sepia(0.3);

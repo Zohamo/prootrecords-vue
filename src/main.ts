@@ -1,4 +1,5 @@
 import Vue from "vue";
+import colors from "vuetify/lib/util/colors";
 import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
@@ -8,8 +9,8 @@ import "./assets/css/style.css";
 Vue.config.productionTip = false;
 
 // Global constants
-Vue.prototype.$bandcampBgColor = "ffffff";
-Vue.prototype.$bandcampLinkColor = "7B1FA2";
+Vue.prototype.$bandcampBgColor = colors.grey.darken4.replace("#", "");
+Vue.prototype.$bandcampLinkColor = colors.purple.lighten2.replace("#", "");
 
 new Vue({
   router,
