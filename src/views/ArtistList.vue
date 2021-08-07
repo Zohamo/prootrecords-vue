@@ -1,35 +1,63 @@
 <template>
-  <v-container fluid>
-    <v-row class="align-stretch">
-      <v-col
-        cols="12"
-        :class="{
-          'col-lg-6 col-xl-4': artist.isActive,
-          'col-md-6 col-lg-4 col-xl-3': !artist.isActive,
-        }"
+  <div style="position: relative">
+    <v-navigation-drawer
+      style="
+        position: fixed;
+        min-width: 400px;
+        max-height: 100vh;
+        margin-left: 270px;
+      "
+    >
+      <artist-list-card
         v-for="artist of artists"
         :key="artist.slug"
-      >
-        <artist-card :artist="artist" />
-      </v-col>
-    </v-row>
-  </v-container>
+        :artist="artist"
+        class="my-3 mr-3"
+      />
+    </v-navigation-drawer>
+    <v-container fluid>
+      <artist-details
+        v-if="!loadingArtist && artist"
+        :artist="artist"
+        style="margin-left: 400px"
+      />
+    </v-container>
+  </div>
 </template>
 
 <script lang="ts">
-import ArtistCard from "@/components/ArtistCard.vue";
+import ArtistDetails from "@/components/ArtistDetails.vue";
+import ArtistListCard from "@/components/ArtistListCard.vue";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "ArtistList",
 
-  components: { ArtistCard },
+  components: { ArtistDetails, ArtistListCard },
+
+  data: () => ({
+    loadingArtist: true,
+  }),
 
   computed: {
-    ...mapState(["artists"]),
+    ...mapState(["artist", "artists"]),
+  },
+
+  watch: {
+    "$route.params.slug": {
+      handler: function () {
+        if (this.$route.params.slug) {
+          this.getArtist(this.$route.params.slug).then(() => {
+            this.loadingArtist = false;
+          });
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
 
   methods: {
-    ...mapActions(["getArtists"]),
+    ...mapActions(["getArtist", "getArtists"]),
   },
 
   async beforeMount() {

@@ -21,11 +21,15 @@ export default {
       type: Object as PropType<Release>,
       required: true,
     },
+    imgSize: {
+      type: String,
+      default: "500",
+    },
   },
 
   computed: {
     imgUrl(): string {
-      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
+      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_${this.imgSize}px.jpg`;
     },
   },
 };

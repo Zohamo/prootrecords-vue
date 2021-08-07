@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    artist: {} as Artist,
     artists: [] as Artist[],
 
     prooject: {} as Prooject,
@@ -15,13 +16,15 @@ export default new Vuex.Store({
     releases: [] as Release[],
   },
 
-  getters: {
-    getArtistBySlug: (state) => (slug: string) => {
-      return state.artists.find((artist: Artist) => artist.slug === slug);
-    },
-  },
-
   mutations: {
+    SET_ARTIST(state, artist): void {
+      const index = state.artists.findIndex(
+        (item) => item.slug === artist.slug
+      );
+      state.artists[index] = artist;
+      state.artist = artist;
+    },
+
     SET_ARTISTS(state, artists): void {
       state.artists = artists;
     },
@@ -33,6 +36,7 @@ export default new Vuex.Store({
       state.proojects[index] = prooject;
       state.prooject = prooject;
     },
+
     SET_PROOJECTS(state, proojects): void {
       state.proojects = proojects;
     },
@@ -44,12 +48,24 @@ export default new Vuex.Store({
       state.releases[index] = release;
       state.release = release;
     },
+
     SET_RELEASES(state, releases): void {
       state.releases = releases;
     },
   },
 
   actions: {
+    async getArtist({ state, commit, dispatch }, slug: string): Promise<void> {
+      const artist = state.artists.find((artist) => artist.slug === slug);
+      if (artist?.relationships) {
+        return commit("SET_ARTIST", artist);
+      }
+      return fetch(`${process.env.VUE_APP_API_URL}/artists/${slug}`)
+        .then((res) => res.json())
+        .then((res) => commit("SET_ARTIST", res))
+        .catch((error) => console.log("get artist", error));
+    },
+
     async getArtists({ state, commit }): Promise<void> {
       if (state.artists.length) {
         return;

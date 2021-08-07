@@ -85,7 +85,7 @@
 
                 <div class="ml-4 d-flex flex-column align-end">
                   <v-subheader class="text-subtitle-2">
-                    {{ release.datePublished | monthYear }}
+                    {{ release.createdAt | monthYear }}
                   </v-subheader>
                   <v-subheader class="text-subtitle-2 small">
                     <small>[{{ release.ref }}]</small>

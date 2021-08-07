@@ -32,7 +32,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/artists/:slug",
     name: "ArtistDetails",
-    component: ArtistDetails,
+    component: ArtistList,
     props: {
       type: String,
       required: true,
