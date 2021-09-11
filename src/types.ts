@@ -23,10 +23,28 @@ export interface Link {
   platform: Platform;
 }
 
+export interface Picture {
+  thumbUrl: string;
+  fullUrl: string
+}
+
 export interface Platform {
   name: string;
   url: string;
   slug: string;
+}
+
+export interface Product {
+  id: number
+  artist?: string
+  title: string
+  details: string
+  price: number
+  purchaseUrl: string
+  bandcampId: string
+  pictures: Picture[]
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Prooject {

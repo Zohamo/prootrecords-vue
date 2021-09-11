@@ -1,9 +1,9 @@
 import Home from "@/views/Home.vue";
-import ArtistDetails from "@/views/ArtistDetails.vue";
 import ArtistList from "@/views/ArtistList.vue";
 import ProojectDetails from "@/views/ProojectDetails.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
 import ReleaseList from "@/views/ReleaseList.vue";
+import Shop from "@/views/Shop.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
@@ -60,6 +60,11 @@ const routes: Array<RouteConfig> = [
       type: String,
       required: true,
     },
+  },
+  {
+    path: "/shop",
+    name: "Shop",
+    component: Shop,
   },
 ];
 

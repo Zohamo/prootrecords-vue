@@ -129,7 +129,7 @@ export default {
         ],
       },
       { name: "/releases", text: "releases" },
-      // { name: "/shop", text: "shop" },
+      { name: "/shop", text: "shop" },
     ],
 
     releasesPanel: false,

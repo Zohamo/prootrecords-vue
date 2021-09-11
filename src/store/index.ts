@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Artist, Prooject, Release } from "@/types";
+import { Artist, Product, Prooject, Release } from "@/types";
 
 Vue.use(Vuex);
 
@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     artist: {} as Artist,
     artists: [] as Artist[],
+
+    products: [] as Product[],
 
     prooject: {} as Prooject,
     proojects: [] as Prooject[],
@@ -35,6 +37,10 @@ export default new Vuex.Store({
       );
       state.proojects[index] = prooject;
       state.prooject = prooject;
+    },
+
+    SET_PRODUCTS(state, products): void {
+      state.products = products;
     },
 
     SET_PROOJECTS(state, proojects): void {
@@ -93,6 +99,16 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((res) => commit("SET_PROOJECT", res))
         .catch((error) => console.log("get prooject", error));
+    },
+
+    async getProducts({ state, commit }): Promise<void> {
+      if (state.products.length) {
+        return;
+      }
+      return fetch(`${process.env.VUE_APP_API_URL}/products`)
+        .then((res) => res.json())
+        .then((res) => commit("SET_PRODUCTS", res))
+        .catch((error) => console.log("get products", error));
     },
 
     async getProojects({ state, commit }): Promise<void> {
