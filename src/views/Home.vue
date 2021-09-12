@@ -2,18 +2,17 @@
   <div style="width: 100%; height: 100%">
     <v-slide-x-transition :hide-on-leave="true">
       <v-row>
-        <v-col v-if="release" cols="9" style="max-width: 1000px">
+        <v-col cols="12" lg="9" md="8" style="max-width: 1000px">
           <div class="d-flex flex-column">
             <v-subheader class="primary--text" v-html="'Last Release'" />
-            <last-release :release="release" />
+            <last-release v-if="release" :release="release" />
           </div>
         </v-col>
-        <v-col>
+        <v-col cols="12" lg="3" md="4">
           <div class="d-flex flex-column">
-            <v-subheader
-              class="primary--text"
-              v-html="'Prootjects &middot; Last Entries'"
-            />
+            <v-subheader class="primary--text">
+              Prootjects &middot; Last Entries
+            </v-subheader>
             <v-card>
               <home-prooject-list-item
                 v-for="prooject of proojects"
