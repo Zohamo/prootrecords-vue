@@ -19,11 +19,13 @@
     <v-card-text v-if="product.description" v-html="product.description" />
 
     <div class="d-flex mx-3">
-      <iframe
+      <player
+        v-if="product && product.bandcampId"
+        :id="product.bandcampId"
         class="mx-2"
-        style="border: 0; width: 100%; max-width: 450px; height: 430px"
-        :src="`https://bandcamp.com/EmbeddedPlayer/album=${product.bandcampId}/size=large/bgcol=${$bandcampBgColor}/linkcol=${$bandcampLinkColor}/artwork=small/transparent=true/`"
-        seamless
+        size="large"
+        artwork="small"
+        add-style="width: 100%; max-width: 450px; height: 430px"
       />
 
       <div class="flex-grow-1 mx-2">
@@ -66,10 +68,13 @@
 </template>
 
 <script lang="ts">
+import Player from "@/components/Player.vue";
 import { Product } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "ProductCard",
+
+  components: { Player },
 
   props: {
     product: {

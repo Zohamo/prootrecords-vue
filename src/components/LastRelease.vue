@@ -30,10 +30,13 @@
         style="height: 100%; max-width: 700px"
       >
         <v-card tile class="mb-4" style="height: 120px">
-          <iframe
-            style="border: 0; width: 100%; height: 120px"
-            :src="bandcampSrc"
-            seamless
+          <player
+            v-if="release && release.bandcampId"
+            :id="release.bandcampId"
+            size="large"
+            artwork="none"
+            :tracklist="false"
+            add-style="width: 100%; height: 120px"
           />
         </v-card>
 
@@ -68,10 +71,13 @@
 </template>
 
 <script lang="ts">
+import Player from "@/components/Player.vue";
 import { Link, Release } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "LastRelease",
+
+  components: { Player },
 
   props: {
     release: {
@@ -93,10 +99,6 @@ export default {
             (link: Link) => link.platform.slug === "bandcamp"
           ).url + "?action=download"
         : "";
-    },
-
-    bandcampSrc(): string {
-      return `https://bandcamp.com/EmbeddedPlayer/album=${this.release.bandcampId}/size=large/bgcol=${this.$bandcampBgColor}/linkcol=${this.$bandcampLinkColor}/tracklist=false/artwork=none/transparent=true/`;
     },
   },
 };

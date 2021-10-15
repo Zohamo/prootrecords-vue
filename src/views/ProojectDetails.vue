@@ -58,18 +58,13 @@
             </v-card>
           </v-col>
           <v-col cols="5">
-            <iframe
-              style="border: 0; width: 100%; height: 700px"
-              :src="
-                'https://bandcamp.com/EmbeddedPlayer/album=' +
-                prooject.bandcampId +
-                '/size=large/bgcol=' +
-                $bandcampBgColor +
-                '/linkcol=' +
-                $bandcampLinkColor +
-                '/artwork=none/transparent=true/d'
-              "
-              seamless
+            <player
+              v-if="prooject && prooject.bandcampId"
+              :id="prooject.bandcampId"
+              class="mx-2"
+              size="large"
+              artwork="none"
+              add-style="width: 100%; height: 700px"
             />
           </v-col>
         </v-row>
@@ -80,11 +75,12 @@
 
 <script lang="ts">
 import BaseLoader from "@/components/BaseLoader.vue";
+import Player from "@/components/Player.vue";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "ProojectDetails",
 
-  components: { BaseLoader },
+  components: { BaseLoader, Player },
 
   data: () => ({
     loading: false,

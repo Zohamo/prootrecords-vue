@@ -18,18 +18,12 @@
             </v-card>
 
             <v-card tile>
-              <iframe
-                style="border: 0; width: 500px; height: 472px"
-                :src="
-                  'https://bandcamp.com/EmbeddedPlayer/album=' +
-                  release.bandcampId +
-                  '/size=large/bgcol=' +
-                  $bandcampBgColor +
-                  '/linkcol=' +
-                  $bandcampLinkColor +
-                  '/artwork=none/transparent=true/'
-                "
-                seamless
+              <player
+                v-if="release && release.bandcampId"
+                :id="release.bandcampId"
+                size="large"
+                artwork="none"
+                add-style="width: 500px; height: 472px"
               />
             </v-card>
 
@@ -215,13 +209,14 @@
 
 <script lang="ts">
 import BaseLoader from "@/components/BaseLoader.vue";
+import Player from "@/components/Player.vue";
 import ReleaseTracklistItem from "@/components/ReleaseTracklistItem.vue";
 import { Link, Track } from "@/types";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "ReleaseDetails",
 
-  components: { BaseLoader, ReleaseTracklistItem },
+  components: { BaseLoader, Player, ReleaseTracklistItem },
 
   data: () => ({
     loading: false,

@@ -8,10 +8,6 @@ import "./assets/css/style.css";
 
 Vue.config.productionTip = false;
 
-// Global constants
-Vue.prototype.$bandcampBgColor = colors.grey.darken4.replace("#", "");
-Vue.prototype.$bandcampLinkColor = colors.purple.lighten2.replace("#", "");
-
 new Vue({
   router,
   store,
