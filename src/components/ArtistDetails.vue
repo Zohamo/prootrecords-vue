@@ -67,7 +67,7 @@
       <v-row class="px-3">
         <v-col
           cols="12"
-          class="col-md-3"
+          class="col-lg-4 col-xl-3"
           v-for="release in artist.relationships.releases"
           :key="release.slug"
         >

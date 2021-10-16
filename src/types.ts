@@ -25,7 +25,7 @@ export interface Link {
 
 export interface Picture {
   thumbUrl: string;
-  fullUrl: string
+  fullUrl: string;
 }
 
 export interface Platform {
@@ -35,16 +35,16 @@ export interface Platform {
 }
 
 export interface Product {
-  id: number
-  artist?: string
-  title: string
-  details: string
-  price: number
-  purchaseUrl: string
-  bandcampId: string
-  pictures: Picture[]
-  createdAt: string
-  updatedAt: string
+  id: number;
+  artist?: string;
+  title: string;
+  details: string;
+  price: number;
+  purchaseUrl: string;
+  bandcampId: string;
+  pictures: Picture[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Prooject {
