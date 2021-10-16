@@ -5,7 +5,8 @@
         position: fixed;
         min-width: 400px;
         max-height: 100vh;
-        margin-left: 270px;
+        margin-top: 95px;
+        margin-left: 220px;
       "
     >
       <artist-list-card

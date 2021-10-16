@@ -1,8 +1,10 @@
 <template>
   <v-app>
+    <the-header />
+
     <the-sidebar />
 
-    <v-main class="px-3" style="margin-left: 270px">
+    <v-main class="px-3" style="margin-top: 95px; margin-left: 200px">
       <v-scale-transition origin="center center">
         <v-btn
           v-show="scrollToTopBtn"
@@ -27,13 +29,14 @@
 </template>
 
 <script lang="ts">
+import TheHeader from "@/components/TheHeader.vue";
 import TheSidebar from "@/components/TheSidebar.vue";
 import Vue from "vue";
 
 export default Vue.extend({
   name: "App",
 
-  components: { TheSidebar },
+  components: { TheHeader, TheSidebar },
 
   data: () => ({
     scrollToTopBtn: false,
