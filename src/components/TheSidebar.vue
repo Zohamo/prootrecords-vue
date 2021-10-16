@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "TheSidebarReleases",
 
@@ -34,13 +34,7 @@ export default {
     ...mapState(["releases"]),
   },
 
-  beforeMount() {
-    this.getReleases();
-  },
-
   methods: {
-    ...mapActions(["getReleases"]),
-
     getReleaseImgUrl(ref: string): string {
       return `https://prootrecords.com/music/${ref}/${ref}_150px.jpg`;
     },

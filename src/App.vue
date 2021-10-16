@@ -32,6 +32,7 @@
 import TheHeader from "@/components/TheHeader.vue";
 import TheSidebar from "@/components/TheSidebar.vue";
 import Vue from "vue";
+import { mapActions } from "vuex";
 
 export default Vue.extend({
   name: "App",
@@ -42,7 +43,14 @@ export default Vue.extend({
     scrollToTopBtn: false,
   }),
 
+  beforeMount() {
+    this.getProojects();
+    this.getReleases();
+  },
+
   methods: {
+    ...mapActions(["getProojects", "getReleases"]),
+
     onScroll(e) {
       if (typeof window === "undefined") return;
       const top = window.pageYOffset || e.target.scrollTop || 0;

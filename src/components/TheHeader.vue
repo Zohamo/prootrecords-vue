@@ -21,7 +21,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-list-item v-else link>
-        <v-menu>
+        <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-list-item-content>
               <v-list-item-title
@@ -60,6 +60,7 @@
 </template>
 
 <script lang="ts">
+import { mapState } from "vuex";
 export default {
   name: "TheHeader",
 
@@ -71,10 +72,7 @@ export default {
       {
         name: "/proojects",
         text: "proojects",
-        children: [
-          { name: "/vgu", text: "V.G. Unplugged" },
-          { name: "/classical", text: "C.l.a.s.s.i.c.a.l." },
-        ],
+        children: [],
       },
       { name: "/releases", text: "releases" },
       { name: "/shop", text: "shop" },
@@ -97,6 +95,23 @@ export default {
       },
     ],
   }),
+
+  computed: {
+    ...mapState(["proojects"]),
+  },
+
+  watch: {
+    proojects() {
+      if (this.proojects.length) {
+        this.proojects.forEach((prooject) => [
+          this.navLinks[2].children.push({
+            name: "/" + prooject.slug,
+            text: prooject.title,
+          }),
+        ]);
+      }
+    },
+  },
 };
 </script>
 

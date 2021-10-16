@@ -13,6 +13,7 @@ export default new Vuex.Store({
 
     prooject: {} as Prooject,
     proojects: [] as Prooject[],
+    proojectsPromise: null,
 
     release: {} as Release,
     releases: [] as Release[],
@@ -31,6 +32,10 @@ export default new Vuex.Store({
       state.artists = artists;
     },
 
+    SET_PRODUCTS(state, products): void {
+      state.products = products;
+    },
+
     SET_PROOJECT(state, prooject): void {
       const index = state.proojects.findIndex(
         (item) => item.slug === prooject.slug
@@ -39,12 +44,12 @@ export default new Vuex.Store({
       state.prooject = prooject;
     },
 
-    SET_PRODUCTS(state, products): void {
-      state.products = products;
-    },
-
     SET_PROOJECTS(state, proojects): void {
       state.proojects = proojects;
+    },
+
+    SET_PROOJECTS_PROMISE(state, promise): void {
+      state.proojectsPromise = promise;
     },
 
     SET_RELEASE(state, release): void {
@@ -82,25 +87,6 @@ export default new Vuex.Store({
         .catch((error) => console.log("getArtists", error));
     },
 
-    async getProoject(
-      { state, commit, dispatch },
-      slug: string
-    ): Promise<void> {
-      if (!state.proojects.length) {
-        dispatch("getProojects");
-      }
-      const prooject = state.proojects.find(
-        (prooject) => prooject.slug === slug
-      );
-      if (prooject.tracks.length > 3) {
-        return commit("SET_PROOJECT", prooject);
-      }
-      return fetch(`${process.env.VUE_APP_API_URL}/proojects/${slug}`)
-        .then((res) => res.json())
-        .then((res) => commit("SET_PROOJECT", res))
-        .catch((error) => console.log("get prooject", error));
-    },
-
     async getProducts({ state, commit }): Promise<void> {
       if (state.products.length) {
         return;
@@ -111,14 +97,42 @@ export default new Vuex.Store({
         .catch((error) => console.log("get products", error));
     },
 
+    async getProoject(
+      { state, commit, dispatch },
+      slug: string
+    ): Promise<void> {
+      if (!state.proojects.length) {
+        dispatch("getProojects");
+      }
+      const prooject = state.proojects.find(
+        (prooject) => prooject.slug === slug
+      );
+      if (prooject && prooject.tracks.length > 3) {
+        return commit("SET_PROOJECT", prooject);
+      }
+      return fetch(`${process.env.VUE_APP_API_URL}/proojects/${slug}`)
+        .then((res) => res.json())
+        .then((res) => commit("SET_PROOJECT", res))
+        .catch((error) => console.log("get prooject", error));
+    },
+
     async getProojects({ state, commit }): Promise<void> {
       if (state.proojects.length) {
         return;
       }
-      return fetch(`${process.env.VUE_APP_API_URL}/proojects`)
+
+      if (state.proojectsPromise) {
+        return state.proojectsPromise;
+      }
+
+      const promise = fetch(`${process.env.VUE_APP_API_URL}/proojects`)
         .then((res) => res.json())
         .then((res) => commit("SET_PROOJECTS", res))
         .catch((error) => console.log("get proojects", error));
+
+      commit("SET_PROOJECTS_PROMISE", promise);
+
+      return promise;
     },
 
     async getRelease({ state, commit, dispatch }, slug: string): Promise<void> {

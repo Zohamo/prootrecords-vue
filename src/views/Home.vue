@@ -52,11 +52,10 @@ export default {
     if (this.releases.length) {
       this.getRelease(this.releases[0].slug);
     }
-    this.getProojects();
   },
 
   methods: {
-    ...mapActions(["getRelease", "getProojects"]),
+    ...mapActions(["getRelease"]),
   },
 };
 </script>
