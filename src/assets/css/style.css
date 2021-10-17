@@ -1,6 +1,11 @@
 a {
   text-decoration: none;
   color: var(--v-primary-lighten1);
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+
+a:hover {
+  background-color: var(--v-accent-base) !important;
 }
 
 .proot--text {
@@ -31,8 +36,15 @@ a {
 .v-card--link {
   background-color: var(--v-background-lighten1) !important;
 }
-.v-card--link:hover {
-  background-color: var(--v-primary-base) !important;
+.theme--light.v-list-item:hover::before {
+  opacity: 0 !important;
+}
+.v-card--link:hover,
+.v-list-item--link:before,
+.theme--light.v-list-item--link.v-list-item--active:not(.v-list-item--disabled),
+.theme--light.v-list-item--link:not(.v-list-item--active):not(.v-list-item--disabled):hover {
+  background-color: var(--v-accent-base) !important;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 .v-card--link .v-image__image {
   filter: sepia(0.3);

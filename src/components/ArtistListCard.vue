@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="`/artists/${artist.slug}`">
+  <v-card tile elevation="0" :to="`/artists/${artist.slug}`">
     <div class="d-flex flex-no-wrap justify-space-between">
       <v-card-title class="text-h5 d-flex flex-nowrap">
         <span>{{ artist.name }}</span>
