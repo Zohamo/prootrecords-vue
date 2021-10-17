@@ -50,7 +50,14 @@
 
     <v-tooltip bottom v-for="socialLink in socialLinks" :key="socialLink.name">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn :href="socialLink.url" icon x-large v-bind="attrs" v-on="on">
+        <v-btn
+          :href="socialLink.url"
+          icon
+          x-large
+          color="primary"
+          v-bind="attrs"
+          v-on="on"
+        >
           <v-icon v-text="socialLink.icon" />
         </v-btn>
       </template>
@@ -92,6 +99,11 @@ export default {
         name: "Facebook",
         url: "https://www.facebook.com/Prootrecords",
         icon: "mdi-facebook",
+      },
+      {
+        name: "YouTube",
+        url: "https://www.youtube.com/channel/UCfsvySaVOwLZwt1tLna3vCQ/",
+        icon: "mdi-youtube",
       },
     ],
   }),
