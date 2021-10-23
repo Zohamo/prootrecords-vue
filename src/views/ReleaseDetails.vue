@@ -268,27 +268,6 @@ export default {
       return this.$vuetify.goTo(target);
     },
   },
-
-  filters: {
-    monthYear: (value: string) => {
-      return value
-        ? [
-            "Jan. ",
-            "Feb. ",
-            "Mar. ",
-            "Apr. ",
-            "May ",
-            "Jun. ",
-            "Jul. ",
-            "Aug. ",
-            "Sep. ",
-            "Oct. ",
-            "Nov. ",
-            "Dec. ",
-          ][+value.split("-")[1]] + value.split("-")[0]
-        : value;
-    },
-  },
 };
 </script>
 
