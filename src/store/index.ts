@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Artist, Product, Prooject, Release } from "@/types";
+import { Artist, Movie, Product, Prooject, Release } from "@/types";
 
 Vue.use(Vuex);
 
@@ -8,6 +8,9 @@ export default new Vuex.Store({
   state: {
     artist: {} as Artist,
     artists: [] as Artist[],
+
+    movie: {} as Movie,
+    movies: [] as Movie[],
 
     products: [] as Product[],
 
@@ -30,6 +33,16 @@ export default new Vuex.Store({
 
     SET_ARTISTS(state, artists): void {
       state.artists = artists;
+    },
+
+    SET_MOVIE(state, movie): void {
+      const index = state.movies.findIndex((item) => item.slug === movie.slug);
+      state.movies[index] = movie;
+      state.movie = movie;
+    },
+
+    SET_MOVIES(state, movies): void {
+      state.movies = movies;
     },
 
     SET_PRODUCTS(state, products): void {
@@ -85,6 +98,27 @@ export default new Vuex.Store({
         .then((res) => res.json())
         .then((artists) => commit("SET_ARTISTS", artists))
         .catch((error) => console.log("getArtists", error));
+    },
+
+    async getMovie({ state, commit, dispatch }, slug: string): Promise<void> {
+      const movie = state.movies.find((movie) => movie.slug === slug);
+      if (movie?.embed) {
+        return commit("SET_MOVIE", movie);
+      }
+      return fetch(`${process.env.VUE_APP_API_URL}/movies/${slug}`)
+        .then((res) => res.json())
+        .then((res) => commit("SET_MOVIE", res))
+        .catch((error) => console.log("get movie", error));
+    },
+
+    async getMovies({ state, commit }): Promise<void> {
+      if (state.movies.length) {
+        return;
+      }
+      return fetch(`${process.env.VUE_APP_API_URL}/movies`)
+        .then((res) => res.json())
+        .then((movies) => commit("SET_MOVIES", movies))
+        .catch((error) => console.log("getMovies", error));
     },
 
     async getProducts({ state, commit }): Promise<void> {

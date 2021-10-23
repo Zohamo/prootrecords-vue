@@ -23,6 +23,17 @@ export interface Link {
   platform: Platform;
 }
 
+export interface Movie {
+  id: number;
+  slug: string;
+  title: string;
+  artist: string;
+  embed: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Picture {
   thumbUrl: string;
   fullUrl: string;

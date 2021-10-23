@@ -1,5 +1,7 @@
 import Home from "@/views/Home.vue";
 import ArtistList from "@/views/ArtistList.vue";
+import MovieDetails from "@/views/MovieDetails.vue";
+import MovieList from "@/views/MovieList.vue";
 import ProojectDetails from "@/views/ProojectDetails.vue";
 import ReleaseDetails from "@/views/ReleaseDetails.vue";
 import ReleaseList from "@/views/ReleaseList.vue";
@@ -33,6 +35,20 @@ const routes: Array<RouteConfig> = [
     path: "/artists/:slug",
     name: "ArtistDetails",
     component: ArtistList,
+    props: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    path: "/movies",
+    name: "Movies",
+    component: MovieList,
+  },
+  {
+    path: "/movies/:slug",
+    name: "MovieDetails",
+    component: MovieDetails,
     props: {
       type: String,
       required: true,

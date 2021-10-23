@@ -75,12 +75,8 @@ export default {
     navLinks: [
       { name: "/about", text: "about" },
       { name: "/artists", text: "artists" },
-      // { name: "/movies", text: "movies" },
-      {
-        name: "/proojects",
-        text: "proojects",
-        children: [],
-      },
+      { name: "/movies", text: "movies" },
+      { name: "/proojects", text: "proojects", children: [] },
       { name: "/releases", text: "releases" },
       { name: "/shop", text: "shop" },
     ],
@@ -116,7 +112,7 @@ export default {
     proojects() {
       if (this.proojects.length) {
         this.proojects.forEach((prooject) => [
-          this.navLinks[2].children.push({
+          this.navLinks[3].children.push({
             name: "/" + prooject.slug,
             text: prooject.title,
           }),
