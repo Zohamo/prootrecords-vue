@@ -28,6 +28,28 @@
     </v-card-actions>
 
     <template
+      v-if="artist.relationships.movies && artist.relationships.movies.length"
+    >
+      <v-divider class="mx-4" />
+
+      <v-card-title
+        class="primary--text text-uppercase text-h6"
+        v-text="'Related movies'"
+      />
+
+      <v-row class="px-3">
+        <v-col
+          cols="12"
+          class="col-lg-6 col-xl-4"
+          v-for="movie in artist.relationships.movies"
+          :key="movie.slug"
+        >
+          <movie-list-card :movie="movie" class="mb-3" />
+        </v-col>
+      </v-row>
+    </template>
+
+    <template
       v-if="
         artist.relationships.proojects && artist.relationships.proojects.length
       "
@@ -81,13 +103,14 @@
 </template>
 
 <script lang="ts">
+import MovieListCard from "@/components/MovieListCard.vue";
 import ReleaseCard from "@/components/ReleaseCard.vue";
 import { Artist } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "ArtistDetails",
 
-  components: { ReleaseCard },
+  components: { MovieListCard, ReleaseCard },
 
   props: {
     artist: {
