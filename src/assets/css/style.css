@@ -8,6 +8,10 @@ a:hover {
   background-color: var(--v-accent-base) !important;
 }
 
+[lang="fr"] {
+  color: var(--v-secondary-lighten3);
+}
+
 .proot--text {
   font-family: "Oi", cursive !important;
   font-weight: 100 !important;
