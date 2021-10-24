@@ -1,18 +1,14 @@
 <template>
-  <v-app-bar class="pa-2" fixed hide-on-scroll height="auto">
+  <v-app-bar class="pa-2" fixed height="auto" :class="{ shrink: shrink }">
     <v-app-bar-title class="mr-8">
       <router-link to="/">
-        <h1 class="proot--text" style="font-size: 3rem; line-height: 3rem">
-          Proot
-        </h1>
+        <h1 class="proot--text">Proot</h1>
       </router-link>
-      <v-subheader style="height: auto">
-        frivolous &amp; original music
-      </v-subheader>
+      <v-subheader> frivolous &amp; original music </v-subheader>
     </v-app-bar-title>
 
     <div v-for="navLink in navLinks" :key="navLink.name">
-      <v-list-item v-if="!navLink.children" :to="navLink.name">
+      <v-list-item v-if="!navLink.children" :to="navLink.name" class="nav-item">
         <v-list-item-content>
           <v-list-item-title
             class="primary--text text-uppercase"
@@ -20,7 +16,7 @@
           />
         </v-list-item-content>
       </v-list-item>
-      <v-list-item v-else link>
+      <v-list-item v-else link class="nav-item">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-list-item-content>
@@ -53,7 +49,8 @@
         <v-btn
           :href="socialLink.url"
           icon
-          x-large
+          :small="shrink"
+          :x-large="!shrink"
           color="primary"
           v-bind="attrs"
           v-on="on"
@@ -70,6 +67,12 @@
 import { mapState } from "vuex";
 export default {
   name: "TheHeader",
+
+  props: {
+    shrink: {
+      type: Boolean,
+    },
+  },
 
   data: () => ({
     navLinks: [
@@ -124,6 +127,43 @@ export default {
 </script>
 
 <style scoped>
+h1,
+.v-subheader,
+.v-list-item__content,
+v-btn--icon {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+.shrink h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.v-subheader {
+  height: 1rem;
+  opacity: 1;
+  overflow: hidden;
+}
+.shrink .v-subheader {
+  height: 0;
+  opacity: 0;
+}
+.nav-item.v-list-item {
+  min-height: auto;
+}
+.shrink .v-list-item__content {
+  padding: 6px 0 !important;
+}
+
+.v-btn--icon {
+  margin-left: 0;
+}
+.shrink .v-btn--icon {
+  margin-left: 8px;
+}
+
 .mdi-cards-diamond {
   transform: rotate(55deg);
 }

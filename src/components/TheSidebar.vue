@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-releases">
+  <div class="sidebar" :class="{ scrolled: scrolled }">
     <v-list>
       <v-list-item
         v-for="release in releases"
@@ -10,7 +10,9 @@
         style="min-height: auto"
       >
         <v-list-item-avatar tile size="150" class="mr-0">
-          <v-img :src="getReleaseImgUrl(release.ref)" />
+          <v-img
+            :src="`https://prootrecords.com/music/${release.ref}/${release.ref}_150px.jpg`"
+          />
         </v-list-item-avatar>
 
         <v-list-item-content class="pt-0">
@@ -30,20 +32,21 @@ import { mapState } from "vuex";
 export default {
   name: "TheSidebarReleases",
 
-  computed: {
-    ...mapState(["releases"]),
+  props: {
+    scrolled: {
+      type: Boolean,
+    },
   },
 
-  methods: {
-    getReleaseImgUrl(ref: string): string {
-      return `https://prootrecords.com/music/${ref}/${ref}_150px.jpg`;
-    },
+  computed: {
+    ...mapState(["releases"]),
   },
 };
 </script>
 
 <style scoped>
-.sidebar-releases {
+.sidebar {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   position: fixed;
   top: 0;
   left: 0;
@@ -52,6 +55,10 @@ export default {
   margin-top: 95px;
   overflow-y: auto;
 }
+.scrolled.sidebar {
+  margin-top: 56px;
+}
+
 .v-list-item__title,
 .v-list-item__subtitle {
   white-space: break-spaces;

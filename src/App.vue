@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <the-header />
+    <the-header :shrink="scrolled" />
 
-    <the-sidebar />
+    <the-sidebar :scrolled="scrolled" />
 
     <v-main class="px-3" style="margin-top: 95px; margin-left: 200px">
       <v-scale-transition origin="center center">
@@ -40,6 +40,7 @@ export default Vue.extend({
   components: { TheHeader, TheSidebar },
 
   data: () => ({
+    scrolled: false,
     scrollToTopBtn: false,
   }),
 
@@ -48,13 +49,19 @@ export default Vue.extend({
     this.getReleases();
   },
 
+  watch: {
+    scrolled() {
+      this.scrollToTopBtn = this.scrolled;
+    },
+  },
+
   methods: {
     ...mapActions(["getProojects", "getReleases"]),
 
     onScroll(e) {
       if (typeof window === "undefined") return;
       const top = window.pageYOffset || e.target.scrollTop || 0;
-      this.scrollToTopBtn = top > 20;
+      this.scrolled = top > 20;
     },
   },
 });
