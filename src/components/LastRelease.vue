@@ -16,10 +16,10 @@
 
     <div class="d-lg-flex flex-nowrap">
       <div class="px-3 flex-shrink-1">
-        <img
-          v-if="releaseImgUrl"
-          :src="releaseImgUrl"
-          class=""
+        <v-img
+          :src="
+            require(`../assets/img/releases/${release.ref}/${release.ref}_500px.jpg`)
+          "
           style="width: auto; max-width: 100%"
           :alt="`${release.title} artwork`"
         />
@@ -87,12 +87,6 @@ export default {
   },
 
   computed: {
-    releaseImgUrl(): string {
-      return this.release?.ref
-        ? `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`
-        : "";
-    },
-
     releaseDownloadUrl(): string {
       return this.release?.links && this.release.links.length
         ? this.release.links.find(

@@ -11,7 +11,10 @@
       >
         <v-list-item-avatar tile size="150" class="mr-0">
           <v-img
-            :src="`https://prootrecords.com/music/${release.ref}/${release.ref}_150px.jpg`"
+            :src="
+              require(`../assets/img/releases/${release.ref}/${release.ref}_150px.jpg`)
+            "
+            :alt="`${release.title} artwork`"
           />
         </v-list-item-avatar>
 

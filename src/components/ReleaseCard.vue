@@ -1,6 +1,11 @@
 <template>
   <v-card :to="'/releases/' + release.slug">
-    <v-img :src="imgUrl" />
+    <v-img
+      :src="
+        require(`../assets/img/releases/${release.ref}/${release.ref}_${imgSize}px.jpg`)
+      "
+      :alt="`${release.title} artwork`"
+    />
 
     <v-card-subtitle class="text-h5 pb-0" v-html="release.artist" />
 
@@ -24,12 +29,6 @@ export default {
     imgSize: {
       type: String,
       default: "500",
-    },
-  },
-
-  computed: {
-    imgUrl(): string {
-      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_${this.imgSize}px.jpg`;
     },
   },
 };
