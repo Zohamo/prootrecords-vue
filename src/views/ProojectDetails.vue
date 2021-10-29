@@ -10,7 +10,7 @@
         </h1>
 
         <v-row>
-          <v-col cols="7">
+          <v-col cols="12" md="7">
             <v-card>
               <v-card-text v-html="prooject.description" class="pb-0" />
 
@@ -57,7 +57,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols="5">
+          <v-col cols="12" md="5">
             <player
               v-if="prooject && prooject.bandcampId"
               :id="prooject.bandcampId"

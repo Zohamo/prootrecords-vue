@@ -1,28 +1,45 @@
 <template>
-  <div style="position: relative">
-    <v-navigation-drawer
-      style="
-        position: fixed;
-        min-width: 400px;
-        max-height: 100vh;
-        margin-top: 95px;
-        margin-left: 220px;
-      "
-    >
+  <div>
+    <div v-if="$vuetify.breakpoint.smAndDown">
+      <artist-details
+        v-if="!loadingArtist && artist && $route.params.slug"
+        :artist="artist"
+      />
+
       <artist-list-card
+        v-else
         v-for="artist of artists"
         :key="artist.slug"
         :artist="artist"
         class="my-3 mr-3"
       />
-    </v-navigation-drawer>
-    <v-container fluid>
-      <artist-details
-        v-if="!loadingArtist && artist"
-        :artist="artist"
-        style="margin-left: 400px"
-      />
-    </v-container>
+    </div>
+
+    <div v-else style="position: relative">
+      <v-navigation-drawer
+        style="
+          position: fixed;
+          min-width: 400px;
+          max-height: 100vh;
+          margin-top: 95px;
+          margin-left: 220px;
+        "
+      >
+        <artist-list-card
+          v-for="artist of artists"
+          :key="artist.slug"
+          :artist="artist"
+          class="my-3 mr-3"
+        />
+      </v-navigation-drawer>
+      <v-container fluid>
+        <artist-details
+          v-if="!loadingArtist && artist"
+          :artist="artist"
+          style="margin-left: 400px"
+        />
+      </v-container>
+    </div>
   </div>
 </template>
 

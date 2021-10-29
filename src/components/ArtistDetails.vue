@@ -43,7 +43,7 @@
       <v-row class="px-3">
         <v-col
           cols="12"
-          class="col-lg-6 col-xl-4"
+          class="col-sm-6 col-xl-4"
           v-for="movie in artist.relationships.movies"
           :key="movie.slug"
         >
@@ -91,8 +91,8 @@
 
       <v-row class="px-3">
         <v-col
-          cols="12"
-          class="col-lg-4 col-xl-3"
+          cols="6"
+          class="col-sm-4 col-md-6 col-lg-4 col-xl-3"
           v-for="release in artist.relationships.releases"
           :key="release.slug"
         >

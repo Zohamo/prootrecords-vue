@@ -1,14 +1,21 @@
 <template>
   <v-card class="pa-3">
-    <div class="d-flex justify-center align-end">
+    <div
+      class="
+        d-flex
+        flex-column flex-sm-row
+        justify-center
+        align-center align-sm-end
+      "
+    >
       <v-card-subtitle
         v-if="product.artist"
-        class="text-h5"
+        class="text-h5 pb-0 pb-sm-4"
         v-html="product.artist"
       />
 
       <v-card-title
-        class="text-h4 pl-0"
+        class="text-h4 pt-0 pt-sm-4 pl-sm-0"
         v-html="product.title"
         style="font-variant: small-caps"
       />
@@ -18,7 +25,16 @@
 
     <v-card-text v-if="product.description" v-html="product.description" />
 
-    <div class="d-flex mx-3">
+    <div
+      class="
+        d-flex
+        flex-column-reverse
+        align-center
+        flex-md-row
+        align-md-start
+        mx-3
+      "
+    >
       <player
         v-if="product && product.bandcampId"
         :id="product.bandcampId"
@@ -28,7 +44,7 @@
         add-style="width: 100%; max-width: 450px; height: 430px"
       />
 
-      <div class="flex-grow-1 mx-2">
+      <div class="flex-grow-1 mx-2" style="max-width: 100%">
         <v-carousel
           cycle
           hide-delimiter-background

@@ -3,7 +3,7 @@
     <v-row>
       <v-col
         cols="12"
-        class="col-md-6 col-lg-4 col-xl-3"
+        class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
         v-for="release of releases"
         :key="release.id"
       >

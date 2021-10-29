@@ -2,9 +2,13 @@
   <v-app>
     <the-header :shrink="scrolled" />
 
-    <the-sidebar :scrolled="scrolled" />
+    <the-sidebar class="d-none d-md-block" :scrolled="scrolled" />
 
-    <v-main class="px-3" style="margin-top: 95px; margin-left: 200px">
+    <v-main
+      class="px-3"
+      style="margin-top: 95px"
+      :class="{ 'margin-for-sidebar': $vuetify.breakpoint.mdAndUp }"
+    >
       <v-scale-transition origin="center center">
         <v-btn
           v-show="scrollToTopBtn"
@@ -66,3 +70,9 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+.margin-for-sidebar {
+  margin-left: 200px;
+}
+</style>
