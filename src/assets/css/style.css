@@ -13,7 +13,7 @@ a:hover {
 }
 
 .proot--text {
-  font-family: "Oi", cursive !important;
+  font-family: "Oi", serif !important;
   font-weight: 100 !important;
 }
 
@@ -44,6 +44,7 @@ a:hover {
   opacity: 0 !important;
 }
 .v-card--link:hover,
+.v-btn:hover,
 .v-list-item--link:before,
 .theme--light.v-list-item--link.v-list-item--active:not(.v-list-item--disabled),
 .theme--light.v-list-item--link:not(.v-list-item--active):not(.v-list-item--disabled):hover {
