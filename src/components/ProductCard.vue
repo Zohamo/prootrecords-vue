@@ -47,12 +47,22 @@
       <div class="flex-grow-1 mx-2" style="max-width: 100%">
         <v-carousel
           cycle
-          hide-delimiter-background
+          hide-delimiters
           show-arrows-on-hover
-          dark
           height="300"
+          class="mx-auto"
           style="max-width: 450px"
         >
+          <template v-slot:prev="{ on, attrs }">
+            <v-btn icon color="primary" v-bind="attrs" v-on="on">
+              <v-icon v-text="'mdi-chevron-left'" />
+            </v-btn>
+          </template>
+          <template v-slot:next="{ on, attrs }">
+            <v-btn icon color="primary" v-bind="attrs" v-on="on">
+              <v-icon v-text="'mdi-chevron-right'" />
+            </v-btn>
+          </template>
           <v-carousel-item
             v-for="(picture, i) in product.pictures"
             :key="i"

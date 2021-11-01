@@ -57,3 +57,12 @@ a:hover {
 .v-card--link:hover .v-image__image {
   filter: sepia(0);
 }
+
+/**
+ * Carousel
+ */
+
+.v-window__prev,
+.v-window__next {
+  background: transparent !important;
+}
