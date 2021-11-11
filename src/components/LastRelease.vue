@@ -17,6 +17,7 @@
     <div class="d-lg-flex flex-nowrap">
       <div class="px-3 flex-shrink-1">
         <v-img
+          v-if="release.ref"
           :src="
             require(`../assets/img/releases/${release.ref}/${release.ref}_500px.jpg`)
           "
