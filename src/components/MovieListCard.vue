@@ -1,7 +1,7 @@
 <template>
   <v-card :to="'/movies/' + movie.slug">
     <v-img
-      :src="require(`../assets/img/movies/${movie.slug}.jpg`)"
+      :src="`${publicPath}/img/movies/${movie.slug}.jpg`"
       :aspect-ratio="16 / 9"
       alt="movie preview"
     />
@@ -15,6 +15,10 @@ import { Movie } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "MovieListCard",
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     movie: {

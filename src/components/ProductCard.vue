@@ -69,7 +69,7 @@
             reverse-transition="fade-transition"
             transition="fade-transition"
           >
-            <v-img :src="picture.thumbUrl" />
+            <v-img :src="picture.thumbUrl" :alt="`${product.title} photo`" />
           </v-carousel-item>
         </v-carousel>
 

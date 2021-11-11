@@ -15,7 +15,7 @@
 
       <v-avatar class="ma-3" size="75" tile>
         <v-img
-          :src="require(`../assets/img/artists/${artist.slug}.jpg`)"
+          :src="`${publicPath}/img/artists/${artist.slug}.jpg`"
           :alt="`${artist.name} picture`"
         />
       </v-avatar>
@@ -28,6 +28,10 @@ import { Artist } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "ArtistListCard",
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     artist: {

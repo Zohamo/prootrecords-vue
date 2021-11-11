@@ -1,9 +1,7 @@
 <template>
   <v-card :to="'/releases/' + release.slug">
     <v-img
-      :src="
-        require(`../assets/img/releases/${release.ref}/${release.ref}_${imgSize}px.jpg`)
-      "
+      :src="`${publicPath}/img/releases/${release.ref}/${release.ref}_${imgSize}px.jpg`"
       :alt="`${release.title} artwork`"
     />
 
@@ -20,6 +18,10 @@ import { Release } from "@/types";
 import { PropType } from "vue";
 export default {
   name: "ReleaseCard",
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     release: {

@@ -8,8 +8,8 @@
           <v-col class="flex-grow-0">
             <v-card tile elevation="3">
               <v-img
-                v-if="imgUrl"
-                :src="imgUrl"
+                v-if="release"
+                :src="`${publicPath}/img/releases/${release.ref}/${release.ref}_500px.jpg`"
                 width="500"
                 height="500"
                 class="mb-6"
@@ -220,6 +220,7 @@ export default {
 
   data: () => ({
     loading: false,
+    publicPath: process.env.VUE_APP_URL,
   }),
 
   watch: {
@@ -244,11 +245,6 @@ export default {
 
     bonusTracklist(): Track[] {
       return this.release.tracks?.filter((track: Track) => track.bonus);
-    },
-
-    imgUrl(): string | void {
-      if (!this.release) return;
-      return `https://prootrecords.com/music/${this.release.ref}/${this.release.ref}_500px.jpg`;
     },
 
     downloadUrl(): string | void {

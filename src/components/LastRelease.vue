@@ -18,9 +18,7 @@
       <div class="px-3 flex-shrink-1">
         <v-img
           v-if="release.ref"
-          :src="
-            require(`../assets/img/releases/${release.ref}/${release.ref}_500px.jpg`)
-          "
+          :src="`${publicPath}/img/releases/${release.ref}/${release.ref}_500px.jpg`"
           style="width: auto; max-width: 100%"
           :alt="`${release.title} artwork`"
         />
@@ -79,6 +77,10 @@ export default {
   name: "LastRelease",
 
   components: { Player },
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     release: {

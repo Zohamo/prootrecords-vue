@@ -11,9 +11,7 @@
       >
         <v-list-item-avatar tile size="150" class="mr-0">
           <v-img
-            :src="
-              require(`../assets/img/releases/${release.ref}/${release.ref}_150px.jpg`)
-            "
+            :src="`${publicPath}/img/releases/${release.ref}/${release.ref}_150px.jpg`"
             :alt="`${release.title} artwork`"
           />
         </v-list-item-avatar>
@@ -34,6 +32,10 @@
 import { mapState } from "vuex";
 export default {
   name: "TheSidebarReleases",
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     scrolled: {
