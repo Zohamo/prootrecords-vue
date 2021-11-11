@@ -69,7 +69,10 @@
             reverse-transition="fade-transition"
             transition="fade-transition"
           >
-            <v-img :src="picture.thumbUrl" :alt="`${product.title} photo`" />
+            <v-img
+              :src="`${publicPath}/img/shop/${picture.thumbUrl}`"
+              :alt="`${product.title} photo`"
+            />
           </v-carousel-item>
         </v-carousel>
 
@@ -101,6 +104,10 @@ export default {
   name: "ProductCard",
 
   components: { Player },
+
+  data: () => ({
+    publicPath: process.env.VUE_APP_URL,
+  }),
 
   props: {
     product: {
