@@ -105,7 +105,7 @@
     <v-navigation-drawer
       v-model="drawer"
       v-show="drawer"
-      absolute
+      fixed
       bottom
       temporary
       class="text-center"
