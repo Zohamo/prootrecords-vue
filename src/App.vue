@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <the-header :shrink="scrolled" />
+    <the-header :shrink="scrolled || $vuetify.breakpoint.smAndDown" />
 
     <the-sidebar class="d-none d-md-block" :scrolled="scrolled" />
 
