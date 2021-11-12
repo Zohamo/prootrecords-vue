@@ -6,8 +6,10 @@
 
     <v-main
       class="px-3"
-      style="margin-top: 95px"
-      :class="{ 'margin-for-sidebar': $vuetify.breakpoint.mdAndUp }"
+      :class="{
+        'margin-for-sidebar': $vuetify.breakpoint.mdAndUp,
+        'margin-for-header-shrinked': scrolled || $vuetify.breakpoint.smAndDown,
+      }"
     >
       <v-scale-transition origin="center center">
         <v-btn
@@ -74,5 +76,11 @@ export default Vue.extend({
 <style scoped>
 .margin-for-sidebar {
   margin-left: 200px;
+}
+main {
+  margin-top: 95px;
+}
+main.margin-for-header-shrinked {
+  margin-top: 56px;
 }
 </style>
