@@ -5,15 +5,36 @@
     <v-slide-x-transition :hide-on-leave="true">
       <v-container v-if="!loading" class="mx-auto">
         <v-row>
-          <v-col class="flex-grow-0">
+          <v-col class="flex-grow-0 order-0 order-md-1">
+            <header
+              v-if="$vuetify.breakpoint.smAndDown"
+              class="d-flex flex-column pb-6"
+            >
+              <div class="d-flex justify-space-between">
+                <div class="text-h5" v-html="release.artist" />
+
+                <div class="ml-4 d-flex flex-column align-end">
+                  <v-subheader class="text-subtitle-2">
+                    {{ release.createdAt | monthYear }}
+                  </v-subheader>
+                  <v-subheader class="text-subtitle-2 small">
+                    <small>[{{ release.ref }}]</small>
+                  </v-subheader>
+                </div>
+              </div>
+
+              <h2 class="text-h4" v-html="release.title" />
+            </header>
+
             <v-card tile elevation="3">
               <v-img
                 v-if="release"
                 :src="`${publicPath}/img/releases/${release.ref}/${release.ref}_500px.jpg`"
                 width="500"
-                height="500"
+                height="auto"
                 class="mb-6"
                 alt="artwork"
+                style="max-width: 100%"
               />
             </v-card>
 
@@ -23,7 +44,7 @@
                 :id="release.bandcampId"
                 size="large"
                 artwork="none"
-                add-style="width: 500px; height: 472px"
+                add-style="width: 500px; height: 472px; max-width: 100%;"
               />
             </v-card>
 
@@ -72,10 +93,13 @@
             </v-card>
           </v-col>
 
-          <v-col>
-            <header class="d-flex flex-column px-8 pt-2">
+          <v-col class="order-1 order-md-0">
+            <header
+              v-if="$vuetify.breakpoint.mdAndUp"
+              class="d-flex flex-column px-8 pt-2"
+            >
               <div class="d-flex justify-space-between">
-                <h3 class="text-h3" v-html="release.artist" />
+                <div class="text-h3" v-html="release.artist" />
 
                 <div class="ml-4 d-flex flex-column align-end">
                   <v-subheader class="text-subtitle-2">
@@ -90,7 +114,11 @@
               <h2 class="text-h2" v-html="release.title" />
             </header>
 
-            <div class="d-flex px-8 my-2" style="width: 100%">
+            <div
+              v-if="$vuetify.breakpoint.mdAndUp"
+              class="d-flex px-8 my-2"
+              style="width: 100%"
+            >
               <v-btn
                 v-if="release.description"
                 @click="scrollTo('#description')"
@@ -135,7 +163,7 @@
             <v-btn
               v-if="downloadUrl"
               :href="downloadUrl"
-              class="my-8 ml-12 pa-3 d-flex"
+              class="my-md-8 mx-auto ml-md-12 pa-3 d-flex"
               target="_blank"
               block
               large
@@ -147,7 +175,9 @@
               <div class="ml-2">
                 <span class="text-h6">Download</span>
 
-                <span class="text-body-2 grey--text ml-1">via Bandcamp</span>
+                <span class="text-body-2 grey--text ml-1 d-none d-md-inline"
+                  >via Bandcamp</span
+                >
               </div>
             </v-btn>
 
