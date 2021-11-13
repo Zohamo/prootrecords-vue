@@ -6,12 +6,13 @@
     />
 
     <v-card-subtitle
+      class="text-uppercase pb-0"
       :class="[small ? 'text-h6' : 'text-h5']"
       v-html="release.artist"
     />
 
     <v-card-title
-      class="pt-0"
+      class="pt-0 pb-2"
       :class="[small ? 'text-h5' : 'text-h4']"
       v-html="release.title"
     />
