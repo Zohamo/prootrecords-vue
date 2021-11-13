@@ -158,8 +158,7 @@
           <v-btn
             :href="socialLink.url"
             icon
-            :small="shrink"
-            :x-large="!shrink"
+            x-large
             color="primary"
             v-bind="attrs"
             v-on="on"
