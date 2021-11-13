@@ -51,11 +51,14 @@ a:hover {
   background-color: var(--v-accent-base) !important;
   transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
-.v-card--link .v-image__image {
-  filter: sepia(0.3);
-}
-.v-card--link:hover .v-image__image {
-  filter: sepia(0);
+
+@media screen and (min-width: 600px) {
+  .v-card--link .v-image__image {
+    filter: sepia(0.3);
+  }
+  .v-card--link:hover .v-image__image {
+    filter: sepia(0);
+  }
 }
 
 /**
