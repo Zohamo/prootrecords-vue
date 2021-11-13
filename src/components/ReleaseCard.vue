@@ -5,9 +5,16 @@
       :alt="`${release.title} artwork`"
     />
 
-    <v-card-subtitle class="text-h5 pb-0" v-html="release.artist" />
+    <v-card-subtitle
+      :class="[small ? 'text-h6' : 'text-h5']"
+      v-html="release.artist"
+    />
 
-    <v-card-title class="text-h4 pt-0" v-html="release.title" />
+    <v-card-title
+      class="pt-0"
+      :class="[small ? 'text-h5' : 'text-h4']"
+      v-html="release.title"
+    />
 
     <v-card-text class="font-italic pt-0" v-html="release.style" />
   </v-card>
@@ -31,6 +38,10 @@ export default {
     imgSize: {
       type: String,
       default: "500",
+    },
+    small: {
+      type: Boolean,
+      default: false,
     },
   },
 };

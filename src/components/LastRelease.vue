@@ -61,7 +61,9 @@
           <v-icon large left>mdi-download</v-icon>
           <div class="ml-2">
             <span class="text-h5">Download</span>
-            <span class="text-body-2 ml-2">via Bandcamp</span>
+            <span class="text-body-2 ml-2 d-none d-md-inline"
+              >via Bandcamp</span
+            >
           </div>
         </v-btn>
       </div>

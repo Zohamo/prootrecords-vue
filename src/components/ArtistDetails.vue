@@ -1,9 +1,9 @@
 <template>
   <v-card>
     <div class="d-flex flex-no-wrap justify-space-between">
-      <v-card-title class="text-h2 d-flex flex-nowrap">
+      <v-card-title class="text-h4 d-flex flex-nowrap">
         <span class="mr-3">{{ artist.name }}</span>
-        <span>
+        <span v-if="$vuetify.breakpoint.lgAndUp">
           <v-icon
             v-for="category in artist.categories"
             :key="category.slug"
@@ -19,6 +19,15 @@
           :alt="`${artist.name} picture`"
         />
       </v-avatar>
+    </div>
+
+    <div v-if="$vuetify.breakpoint.mdAndDown">
+      <v-icon
+        v-for="category in artist.categories"
+        :key="category.slug"
+        class="ml-3"
+        v-text="category.icon"
+      />
     </div>
 
     <v-card-subtitle v-html="artist.description" />
@@ -97,7 +106,12 @@
           :key="release.slug"
         >
           <div>
-            <release-card :release="release" :img-size="'500'" class="mb-3" />
+            <release-card
+              :release="release"
+              :img-size="'500'"
+              :small="true"
+              class="mb-3"
+            />
           </div>
         </v-col>
       </v-row>
